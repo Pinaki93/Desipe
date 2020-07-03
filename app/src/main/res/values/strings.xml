@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Receepee</string>
+    <string name="all_recipes">All Recipes</string>
+    <string name="recipe_details_text">%1$d steps | %2$d ingredients</string>
+</resources>
