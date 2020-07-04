@@ -7,7 +7,7 @@ import dev.pinaki.receepee.feature.listing.RecipeListingViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
-val receepeeModule = module {
+val repositoryModule = module {
     single<RecipeRepository> { RecipeRepositoryImpl() }
 }
 
