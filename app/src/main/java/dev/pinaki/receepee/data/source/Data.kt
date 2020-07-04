@@ -9,8 +9,11 @@ private fun getIngredients(): List<Ingredient> {
         add(Ingredient("Rice", 500, "gms"))
         add(Ingredient("Oil", 4, "tsp"))
         add(Ingredient("Cinnamon", 20, "gms"))
-        add(Ingredient("Garlic", 4, "cloved"))
-        add(Ingredient("Onion", 2, "Medium Sized"))
+        add(Ingredient("Cloves", 6, "pieces"))
+        add(Ingredient("Garlic", 4, "cloves"))
+        add(Ingredient("Chicken", 250, "grams"))
+        add(Ingredient("Onion", 5, "Medium Sized"))
+        add(Ingredient("Wheat Dough", 100, "grams"))
     }
 }
 
@@ -18,14 +21,15 @@ private fun getImage() = "https://cdn.pixabay.com/photo/2016/01/15/10/56/biryani
 
 private fun getSteps(): List<String> {
     return ArrayList<String>().apply {
-        add("Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium")
-        add("Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium")
-        add("Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium")
-        add("Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium")
-        add("Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium")
-        add("Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium")
-        add("Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium")
-        add("Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium")
+        add("Fry the onions until they turn golden")
+        add("Add the dry spices mentioned in the ingredients")
+        add("Add chicken to the pan and fry for about 15 minutes")
+        add("Keep the preparation aside")
+        add("Boil the rice in a separate vessel for 30 minutes")
+        add("Now take the vessel away from flame")
+        add("Prepare layers of rice and chicken masala stacked on each other")
+        add("Now seal the vessel with dough and cook for 20 mins")
+        add("Your biriyani is now ready")
     }
 }
 
@@ -35,7 +39,7 @@ fun getSampleData(): List<Recipe> {
             Recipe(
                 1,
                 "Palak Paneer",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit,",
+                "A delicacy prepared in different parts of India with tender chicken pieces and aromatic long grain rice",
                 getImage(),
                 getIngredients(),
                 getSteps()
@@ -46,7 +50,7 @@ fun getSampleData(): List<Recipe> {
             Recipe(
                 2,
                 "Chicken Biriyani",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit,",
+                "A delicacy prepared in different parts of India with tender chicken pieces and aromatic long grain rice",
                 getImage(),
                 getIngredients(),
                 getSteps()
@@ -57,7 +61,7 @@ fun getSampleData(): List<Recipe> {
             Recipe(
                 3,
                 "Greek Salad",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit,",
+                "A delicacy prepared in different parts of India with tender chicken pieces and aromatic long grain rice",
                 getImage(),
                 getIngredients(),
                 getSteps()
@@ -68,7 +72,7 @@ fun getSampleData(): List<Recipe> {
             Recipe(
                 4,
                 "Cheese burst Pizza",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit,",
+                "A delicacy prepared in different parts of India with tender chicken pieces and aromatic long grain rice",
                 getImage(),
                 getIngredients(),
                 getSteps()
@@ -79,7 +83,7 @@ fun getSampleData(): List<Recipe> {
             Recipe(
                 5,
                 "Turkey Sandwich",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit,",
+                "A delicacy prepared in different parts of India with tender chicken pieces and aromatic long grain rice",
                 getImage(),
                 getIngredients(),
                 getSteps()
@@ -87,3 +91,12 @@ fun getSampleData(): List<Recipe> {
         )
     }
 }
+
+/*http://imgbox.com/Vbi7WnSF
+http://imgbox.com/87gUpyQx
+http://imgbox.com/k8meaLIh
+http://imgbox.com/bqlnPcxt
+http://imgbox.com/6U4Jibt9
+http://imgbox.com/hIo7iOAf
+http://imgbox.com/J4Telz5u
+http://imgbox.com/bfe0lffD*/

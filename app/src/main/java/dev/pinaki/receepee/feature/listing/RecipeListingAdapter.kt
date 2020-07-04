@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import dev.pinaki.receepee.data.model.Recipe
 
-class RecipeListingAdapter : ListAdapter<Recipe, RecipeListingViewHolder>(recipeDiffUtil) {
+class RecipeListingAdapter : ListAdapter<Recipe, RecipeListingViewHolder>(recipeDiffCallback) {
 
     var onClick: ((Recipe) -> Unit)? = null
 
@@ -18,7 +18,7 @@ class RecipeListingAdapter : ListAdapter<Recipe, RecipeListingViewHolder>(recipe
     }
 
     companion object {
-        val recipeDiffUtil = object : DiffUtil.ItemCallback<Recipe>() {
+        val recipeDiffCallback = object : DiffUtil.ItemCallback<Recipe>() {
             override fun areItemsTheSame(oldItem: Recipe, newItem: Recipe): Boolean {
                 return oldItem.id == newItem.id
             }

@@ -1,23 +1,31 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Customize your theme here. -->
+    <style name="Base.Theme.Receepee" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorOnPrimary">@color/textOnPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorOnSurface">@color/textOnPrimary</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowBackground">@color/white</item>
-<!--        <item name="toolbarStyle">@style/Widget.App.Toolbar</item>-->
+        <item name="colorSurface">@color/colorPrimary</item>
+        <item name="colorSecondary">@color/textOnPrimary</item>
+        <item name="android:colorBackground">@color/colorPrimary</item>
     </style>
 
-<!--    &lt;!&ndash;Toolbar theming&ndash;&gt;-->
-<!--    <style name="Widget.App.Toolbar" parent="Widget.MaterialComponents.Toolbar.Primary">-->
-<!--        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Toolbar</item>-->
-<!--    </style>-->
+    <style name="AppTheme" parent="Base.Theme.Receepee">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="toolbarStyle">@style/Widget.App.Toolbar</item>
+    </style>
 
-<!--    <style name="ThemeOverlay.App.Toolbar" parent="">-->
-<!--        <item name="colorPrimary">@color/colorPrimary</item>-->
-<!--        <item name="colorPrimaryVariant">@color/primaryTextColor</item>-->
-<!--        <item name="colorOnPrimary">@color/primaryTextColor</item>-->
-<!--    </style>-->
+    <!--Toolbar theming-->
+    <style name="Widget.App.Toolbar" parent="Widget.MaterialComponents.Toolbar.Primary">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Toolbar</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Toolbar" parent="">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/textOnPrimary</item>
+        <item name="colorOnPrimary">@color/textOnPrimary</item>
+    </style>
 </resources>

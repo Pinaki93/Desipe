@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@color/navigate_up_button_background" />
+        </shape>
+    </item>
+
+    <item android:drawable="@drawable/ic_baseline_arrow_white_24" />
+</layer-list>

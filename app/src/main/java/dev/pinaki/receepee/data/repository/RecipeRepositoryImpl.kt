@@ -11,6 +11,6 @@ class RecipeRepositoryImpl : RecipeRepository {
     }
 
     override fun getRecipeById(id: Int): LiveData<Recipe?> {
-        return MutableLiveData(getSampleData().firstOrNull { it.id == id })
+        return MutableLiveData(getSampleData().first { it.id == id })
     }
 }

@@ -6,5 +6,18 @@
     <fragment
         android:id="@+id/recipeListingFragment"
         android:name="dev.pinaki.receepee.feature.listing.RecipeListingFragment"
-        android:label="RecipeListingFragment" />
+        android:label="RecipeListingFragment" >
+        <action
+            android:id="@+id/action_recipeListingFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="dev.pinaki.receepee.feature.detail.DetailFragment"
+        android:label="DetailFragment" >
+        <argument
+            android:name="recipeId"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
 </navigation>

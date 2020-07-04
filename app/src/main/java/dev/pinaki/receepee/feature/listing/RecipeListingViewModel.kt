@@ -1,14 +1,19 @@
 package dev.pinaki.receepee.feature.listing
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import dev.pinaki.receepee.common.ds.OneTimeEvent
 import dev.pinaki.receepee.data.model.Recipe
 import dev.pinaki.receepee.data.repository.RecipeRepository
-import timber.log.Timber
 
 class RecipeListingViewModel(private val recipeRepository: RecipeRepository) : ViewModel() {
     val allRecipes = recipeRepository.getAllRecipes()
 
+    private val _showDetails = MutableLiveData<OneTimeEvent<Int>>()
+    val showDetails: LiveData<OneTimeEvent<Int>> = _showDetails
+
     fun onRecipeItemClick(recipe: Recipe) {
-        Timber.tag("RecipeListingViewModel").i("clicked: $recipe")
+        _showDetails.value = OneTimeEvent(recipe.id)
     }
 }

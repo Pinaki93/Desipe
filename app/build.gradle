@@ -52,6 +52,8 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
+
     implementation "androidx.recyclerview:recyclerview:1.2.0-alpha04"
 
     implementation 'com.jakewharton.timber:timber:4.7.1'
