@@ -11,6 +11,6 @@ class RecipeStepsAdapter : ListAdapter<String, RecipeStepsViewHolder>(StringDiff
     }
 
     override fun onBindViewHolder(holder: RecipeStepsViewHolder, position: Int) {
-        holder.bind(position + 1, getItem(position), position == itemCount - 1)
+        holder.bind(position + 1, getItem(position), itemCount)
     }
 }

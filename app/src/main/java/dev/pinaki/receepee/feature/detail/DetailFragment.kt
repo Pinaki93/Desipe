@@ -55,7 +55,9 @@ class DetailFragment : BaseFragment<DetailsFragmentBinding>() {
                     totalScroll += dy
                     val showTitle = totalScroll > binding.toolbar.height
                     if (showTitle != titleShown) {
-                        binding.collapsingToolbarHeader.isTitleEnabled = showTitle
+                        binding.collapsingToolbarHeader.post {
+                            binding.collapsingToolbarHeader.isTitleEnabled = showTitle
+                        }
                     }
                 }
             })

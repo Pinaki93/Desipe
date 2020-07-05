@@ -5,36 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingLeft="16dp"
-    android:paddingRight="16sp">
-
-    <View
-        android:id="@+id/recipe_step_link_top"
-        android:layout_width="1dp"
-        android:layout_height="8dp"
-        android:background="@color/recipe_step_bg_color"
-        app:layout_constraintLeft_toLeftOf="@+id/text_view_step_number"
-        app:layout_constraintRight_toRightOf="@+id/text_view_step_number"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:paddingTop="16dp"
+    android:paddingRight="16sp"
+    android:paddingBottom="16dp">
 
     <TextView
         android:id="@+id/text_view_step_number"
         android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:background="@drawable/recipe_step_background"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:textColor="@color/textOnPrimary"
         android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recipe_step_link_top"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="1" />
 
-    <View
-        android:id="@+id/recipe_step_link_bottom"
-        android:layout_width="1dp"
-        android:layout_height="8dp"
-        android:background="@color/recipe_step_bg_color"
-        app:layout_constraintLeft_toLeftOf="@+id/text_view_step_number"
-        app:layout_constraintRight_toRightOf="@+id/text_view_step_number"
+    <ProgressBar
+        android:id="@+id/progress_bar_recipe_step"
+        style="?android:progressBarStyleHorizontal"
+        android:layout_width="36dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_view_step_number" />
 
     <TextView
