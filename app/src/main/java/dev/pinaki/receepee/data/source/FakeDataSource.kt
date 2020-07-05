@@ -2,7 +2,6 @@ package dev.pinaki.receepee.data.source
 
 import dev.pinaki.receepee.data.model.Ingredient
 import dev.pinaki.receepee.data.model.Recipe
-import dev.pinaki.receepee.data.model.RecipeImage
 
 private fun getIngredients(): List<Ingredient> {
     return ArrayList<Ingredient>().apply {

@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
@@ -17,10 +18,28 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    Properties buildProperties = new Properties()
+    project.rootProject.file("build.properties").withInputStream { buildProperties.load(it) }
+
     buildTypes {
+        debug {
+            buildConfigField "String", 'SERVER_URL', "\"${buildProperties.getProperty("serverUrl")}\""
+
+            buildConfigField "String", 'DATABASE_NAME', "\"${buildProperties.getProperty("databaseName")}\""
+            buildConfigField "int", 'DATABASE_VERSION', "${buildProperties.getProperty("databaseVersion")}"
+
+            buildConfigField "String", 'SHARED_PREFS_NAME', "\"${buildProperties.getProperty("sharedPrefsName")}\""
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            buildConfigField "String", 'SERVER_URL', "\"${buildProperties.getProperty("serverUrl")}\""
+
+            buildConfigField "String", 'DATABASE_NAME', "\"${buildProperties.getProperty("databaseName")}\""
+            buildConfigField "int", 'DATABASE_VERSION', "${buildProperties.getProperty("databaseVersion")}"
+
+            buildConfigField "String", 'SHARED_PREFS_NAME', "\"${buildProperties.getProperty("sharedPrefsName")}\""
         }
     }
 
@@ -67,8 +86,15 @@ dependencies {
     implementation "org.koin:koin-android:$koin_version"
     implementation "org.koin:koin-androidx-viewmodel:$koin_version"
 
+    def moshi_version = "1.9.3"
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:$moshi_version")
+    implementation("com.squareup.moshi:moshi:${moshi_version}")
+
+    def room_version = "2.2.5"
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
 }
