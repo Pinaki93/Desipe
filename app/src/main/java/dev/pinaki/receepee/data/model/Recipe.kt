@@ -6,6 +6,7 @@ import androidx.room.PrimaryKey
 import com.squareup.moshi.JsonClass
 
 @Entity(tableName = "recipe")
+@JsonClass(generateAdapter = true)
 data class Recipe(
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "id")

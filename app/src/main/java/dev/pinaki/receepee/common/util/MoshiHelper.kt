@@ -10,7 +10,7 @@ import java.lang.reflect.Type
  */
 open class MoshiHelper {
 
-    protected val moshi: Moshi = Moshi.Builder().build()
+    val moshi: Moshi = Moshi.Builder().build()
 
     protected inline fun <reified T> adapter(): JsonAdapter<T> = moshi.adapter(T::class.java)
 

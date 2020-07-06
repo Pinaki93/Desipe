@@ -2,6 +2,7 @@ package dev.pinaki.receepee.data.source
 
 import dev.pinaki.receepee.data.model.Ingredient
 import dev.pinaki.receepee.data.model.Recipe
+import dev.pinaki.receepee.helper.moshi.DesipeMoshiHelper
 
 private fun getIngredients(): List<Ingredient> {
     return ArrayList<Ingredient>().apply {
@@ -10,7 +11,6 @@ private fun getIngredients(): List<Ingredient> {
         add(Ingredient("Cinnamon", 20, "gms"))
         add(Ingredient("Cloves", 6, "pieces"))
         add(Ingredient("Garlic", 4, "cloves"))
-        add(Ingredient("Chicken", 250, "grams"))
         add(Ingredient("Onion", 5, "Medium Sized"))
         add(Ingredient("Wheat Dough", 100, "grams"))
     }
@@ -18,15 +18,15 @@ private fun getIngredients(): List<Ingredient> {
 
 private fun getSteps(): List<String> {
     return ArrayList<String>().apply {
-        add("Fry the onions until they turn golden")
-        add("Add the dry spices mentioned in the ingredients")
-        add("Add chicken to the pan and fry for about 15 minutes")
-        add("Keep the preparation aside")
-        add("Boil the rice in a separate vessel for 30 minutes")
-        add("Now take the vessel away from flame")
-        add("Prepare layers of rice and chicken masala stacked on each other.Prepare layers of rice and chicken masala stacked on each other.Prepare layers of rice and chicken masala stacked on each other.Prepare layers of rice and chicken masala stacked on each other")
-        add("Now seal the vessel with dough and cook for 20 mins")
-        add("Your biriyani is now ready")
+        add("At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum")
+        add("Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore")
+        add("At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum")
+        add("Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore")
+        add("At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum")
+        add("Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore")
+        add("At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum")
+        add("At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum")
+        add("Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore")
     }
 }
 
@@ -156,4 +156,8 @@ fun getSampleData(): List<Recipe> {
             )
         )
     }
+}
+
+fun main() {
+    println(DesipeMoshiHelper.recipeListAdapter.toJson(getSampleData()))
 }
