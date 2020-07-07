@@ -3,6 +3,8 @@ package dev.pinaki.receepee.di
 import androidx.room.Room
 import com.squareup.moshi.Moshi
 import dev.pinaki.receepee.BuildConfig
+import dev.pinaki.receepee.common.connectivity.ConnectivityDetector
+import dev.pinaki.receepee.common.connectivity.ConnectivityDetectorImpl
 import dev.pinaki.receepee.common.coroutines.DispatcherProvider
 import dev.pinaki.receepee.common.coroutines.DispatcherProviderImpl
 import dev.pinaki.receepee.data.repository.RecipeRepository
@@ -15,6 +17,7 @@ import dev.pinaki.receepee.helper.moshi.DesipeMoshiHelper
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
@@ -39,6 +42,10 @@ private val databaseModule = module {
     }
 
     single { get<DesipeDatabase>().recipeDao() }
+}
+
+private val connectivityDetectorModule = module {
+    single<ConnectivityDetector> { ConnectivityDetectorImpl(androidApplication()) }
 }
 
 private val httpModule = module {
@@ -79,13 +86,14 @@ private val dispatcherProviderModule = module {
 }
 
 private val viewModelModule = module {
-    viewModel { RecipeListingViewModel(get(), get()) }
+    viewModel { RecipeListingViewModel(get(), get(), get()) }
     viewModel { DetailsViewModel(get()) }
 }
 
 val desipeAppModules =
     arrayOf(
         configModule,
+        connectivityDetectorModule,
         databaseModule,
         httpModule,
         repositoryModule,

@@ -1,6 +1,7 @@
 package dev.pinaki.receepee.feature.listing
 
 import android.view.*
+import androidx.annotation.RawRes
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -65,24 +66,13 @@ class RecipeListingFragment : BaseFragment<ListingFragmentBinding>(), View.OnCli
     }
 
     private fun showRecipeList(it: List<Recipe>) {
-        if (it.isNotEmpty()) {
-            if (binding.dataLoadingView.isVisible()) {
-                showDataLoadingView(false)
-            }
-        } else {
-            if (binding.dataLoadingView.isGone()) {
-                showDataLoadingView(true)
-            }
-        }
-
         recipeListingAdapter.submitList(it)
     }
 
     private fun showOfflineView(shouldShow: Boolean) {
+        showDataLoadingView(true)
         if (shouldShow) {
-            showDataLoadingView(true)
-
-            binding.animationView.startLoopingAnimation(R.raw.no_internet_connection)
+            startLoopingAnimation(R.raw.no_internet_connection)
 
             binding.tvHeadline.visible()
             binding.tvHeadline.text = getString(R.string.title_not_connected_to_internet)
@@ -94,13 +84,10 @@ class RecipeListingFragment : BaseFragment<ListingFragmentBinding>(), View.OnCli
         }
     }
 
-
     private fun showLoading(shouldShow: Boolean) {
+        showDataLoadingView(shouldShow)
         if (shouldShow) {
-            showDataLoadingView(true)
-
-            binding.animationView.visible()
-            binding.animationView.startLoopingAnimation(R.raw.recipe_loading)
+            startLoopingAnimation(R.raw.recipe_loading)
 
             binding.tvHeadline.visible()
             binding.tvHeadline.text = getString(R.string.loading_data)
@@ -110,11 +97,9 @@ class RecipeListingFragment : BaseFragment<ListingFragmentBinding>(), View.OnCli
     }
 
     private fun showError(shouldShow: Boolean) {
+        showDataLoadingView(shouldShow)
         if (shouldShow) {
-            showDataLoadingView(true)
-
-            binding.animationView.visible()
-            binding.animationView.startLoopingAnimation(R.raw.no_internet_connection)
+            startLoopingAnimation(R.raw.no_internet_connection)
 
             binding.tvHeadline.visible()
             binding.tvHeadline.text = getString(R.string.title_server_error)
@@ -124,6 +109,13 @@ class RecipeListingFragment : BaseFragment<ListingFragmentBinding>(), View.OnCli
 
             binding.buttonRetry.visible()
         }
+    }
+
+    private fun startLoopingAnimation(@RawRes resource: Int) {
+        if (!binding.animationView.isVisible())
+            binding.animationView.visible()
+
+        binding.animationView.startLoopingAnimation(resource)
     }
 
     private fun showDataLoadingView(shouldShow: Boolean) {
@@ -164,6 +156,5 @@ class RecipeListingFragment : BaseFragment<ListingFragmentBinding>(), View.OnCli
         if (view?.id == R.id.button_retry) {
             viewModel.syncRecipes()
         }
-
     }
 }

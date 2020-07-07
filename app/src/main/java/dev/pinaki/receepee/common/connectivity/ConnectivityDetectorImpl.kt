@@ -10,8 +10,7 @@ import androidx.annotation.RequiresApi
  * Class to check whether the device is currently connected to the internet or not
  * Reference: https://medium.com/@elye.project/android-intercept-on-no-internet-connection-acb91d305357
  */
-class ConnectivityDetectorImpl constructor( val context: Context) :
-    ConnectivityDetector {
+class ConnectivityDetectorImpl(val context: Context) : ConnectivityDetector {
 
     override fun isConnected(): Boolean {
         val connectivityManager =
