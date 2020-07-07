@@ -1,7 +1,6 @@
 package dev.pinaki.receepee.feature.listing
 
-import android.view.LayoutInflater
-import android.view.ViewGroup
+import android.view.*
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -9,10 +8,12 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import dev.pinaki.receepee.R
 import dev.pinaki.receepee.common.base.BaseFragment
+import dev.pinaki.receepee.common.util.*
+import dev.pinaki.receepee.data.model.Recipe
 import dev.pinaki.receepee.databinding.ListingFragmentBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class RecipeListingFragment : BaseFragment<ListingFragmentBinding>() {
+class RecipeListingFragment : BaseFragment<ListingFragmentBinding>(), View.OnClickListener {
 
     private val recipeListingAdapter = RecipeListingAdapter()
     private val viewModel: RecipeListingViewModel by viewModel()
@@ -29,6 +30,8 @@ class RecipeListingFragment : BaseFragment<ListingFragmentBinding>() {
             viewModel.onRecipeItemClick(it)
         }
 
+        binding.buttonRetry.setOnClickListener(this)
+
         with(binding.recyclerView) {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = recipeListingAdapter
@@ -43,7 +46,14 @@ class RecipeListingFragment : BaseFragment<ListingFragmentBinding>() {
     }
 
     override fun observeDataAndActions() {
-        viewModel.allRecipes.observe(this, Observer { recipeListingAdapter.submitList(it) })
+        viewModel.allRecipes.observe(this, Observer { showRecipeList(it) })
+
+        viewModel.showOffline.observe(this, Observer { showOfflineView(it) })
+
+        viewModel.showLoading.observe(this, Observer { showLoading(it) })
+
+        viewModel.showError.observe(this, Observer { showError(it) })
+
         viewModel.showDetails.observe(this, Observer {
             val recipeId = it.getContentIfNotHandled() ?: return@Observer
             findNavController().navigate(
@@ -54,11 +64,105 @@ class RecipeListingFragment : BaseFragment<ListingFragmentBinding>() {
         })
     }
 
+    private fun showRecipeList(it: List<Recipe>) {
+        if (it.isNotEmpty()) {
+            if (binding.dataLoadingView.isVisible()) {
+                showDataLoadingView(false)
+            }
+        } else {
+            if (binding.dataLoadingView.isGone()) {
+                showDataLoadingView(true)
+            }
+        }
+
+        recipeListingAdapter.submitList(it)
+    }
+
+    private fun showOfflineView(shouldShow: Boolean) {
+        if (shouldShow) {
+            showDataLoadingView(true)
+
+            binding.animationView.startLoopingAnimation(R.raw.no_internet_connection)
+
+            binding.tvHeadline.visible()
+            binding.tvHeadline.text = getString(R.string.title_not_connected_to_internet)
+
+            binding.tvContent.visible()
+            binding.tvContent.text = getString(R.string.msg_not_connected_to_internet)
+
+            binding.buttonRetry.visible()
+        }
+    }
+
+
+    private fun showLoading(shouldShow: Boolean) {
+        if (shouldShow) {
+            showDataLoadingView(true)
+
+            binding.animationView.visible()
+            binding.animationView.startLoopingAnimation(R.raw.recipe_loading)
+
+            binding.tvHeadline.visible()
+            binding.tvHeadline.text = getString(R.string.loading_data)
+
+            binding.tvContent.gone()
+        }
+    }
+
+    private fun showError(shouldShow: Boolean) {
+        if (shouldShow) {
+            showDataLoadingView(true)
+
+            binding.animationView.visible()
+            binding.animationView.startLoopingAnimation(R.raw.no_internet_connection)
+
+            binding.tvHeadline.visible()
+            binding.tvHeadline.text = getString(R.string.title_server_error)
+
+            binding.tvContent.visible()
+            binding.tvContent.text = getString(R.string.msg_error_occurred_while_loading_data)
+
+            binding.buttonRetry.visible()
+        }
+    }
+
+    private fun showDataLoadingView(shouldShow: Boolean) {
+        if (shouldShow) {
+            binding.dataLoadingView.visible()
+            binding.recyclerView.gone()
+            binding.toolbar.gone()
+        } else {
+            binding.dataLoadingView.gone()
+            binding.recyclerView.visible()
+            binding.toolbar.visible()
+        }
+    }
+
     override fun getToolbarInstance(): Toolbar? {
         return binding.toolbar
     }
 
     override fun getToolbarTitle(): String? {
         return getString(R.string.all_recipes)
+    }
+
+    override fun fragmentHasOptionsMenu() = true
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.listing_fragment_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.menu_item_refrsh) {
+            viewModel.syncRecipes()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onClick(view: View?) {
+        if (view?.id == R.id.button_retry) {
+            viewModel.syncRecipes()
+        }
+
     }
 }

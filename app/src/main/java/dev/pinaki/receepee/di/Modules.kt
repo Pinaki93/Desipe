@@ -3,6 +3,8 @@ package dev.pinaki.receepee.di
 import androidx.room.Room
 import com.squareup.moshi.Moshi
 import dev.pinaki.receepee.BuildConfig
+import dev.pinaki.receepee.common.coroutines.DispatcherProvider
+import dev.pinaki.receepee.common.coroutines.DispatcherProviderImpl
 import dev.pinaki.receepee.data.repository.RecipeRepository
 import dev.pinaki.receepee.data.repository.RecipeRepositoryImpl
 import dev.pinaki.receepee.data.source.local.DesipeDatabase
@@ -69,13 +71,24 @@ private val httpModule = module {
 }
 
 private val repositoryModule = module {
-    single<RecipeRepository> { RecipeRepositoryImpl() }
+    single<RecipeRepository> { RecipeRepositoryImpl(get(), get()) }
+}
+
+private val dispatcherProviderModule = module {
+    single<DispatcherProvider> { DispatcherProviderImpl() }
 }
 
 private val viewModelModule = module {
-    viewModel { RecipeListingViewModel(get()) }
+    viewModel { RecipeListingViewModel(get(), get()) }
     viewModel { DetailsViewModel(get()) }
 }
 
 val desipeAppModules =
-    arrayOf(configModule, databaseModule, httpModule, repositoryModule, viewModelModule)
+    arrayOf(
+        configModule,
+        databaseModule,
+        httpModule,
+        repositoryModule,
+        dispatcherProviderModule,
+        viewModelModule
+    )

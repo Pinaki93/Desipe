@@ -4,7 +4,7 @@ import androidx.room.TypeConverter
 import dev.pinaki.receepee.data.model.Ingredient
 import dev.pinaki.receepee.helper.moshi.DesipeMoshiHelper
 
-object DataConverter {
+class DataConverter {
 
     @TypeConverter
     fun convertStringListToJson(list: List<String>): String {

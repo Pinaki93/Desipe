@@ -50,6 +50,10 @@ fun View.visible() {
     visibility = View.VISIBLE
 }
 
+fun View.isVisible() = visibility == View.VISIBLE
+
+fun View.isGone() = visibility == View.GONE
+
 fun LottieAnimationView.startLoopingAnimation(@RawRes animation: Int) {
     setAnimation(animation)
     repeatCount = LottieDrawable.INFINITE
