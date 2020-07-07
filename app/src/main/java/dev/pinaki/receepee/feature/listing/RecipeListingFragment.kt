@@ -131,6 +131,7 @@ class RecipeListingFragment : BaseFragment<ListingFragmentBinding>(), View.OnCli
             binding.dataLoadingView.visible()
             binding.recyclerView.gone()
             binding.toolbar.gone()
+            binding.buttonRetry.gone()
         } else {
             binding.dataLoadingView.gone()
             binding.recyclerView.visible()
