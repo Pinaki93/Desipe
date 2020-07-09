@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/recipeListingFragment"
-        android:name="dev.pinaki.receepee.feature.listing.RecipeListingFragment"
+        android:name="dev.pinaki.desipe.feature.listing.RecipeListingFragment"
         android:label="RecipeListingFragment">
         <action
             android:id="@+id/action_recipeListingFragment_to_detailFragment"
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
-        android:name="dev.pinaki.receepee.feature.detail.DetailFragment"
+        android:name="dev.pinaki.desipe.feature.detail.DetailFragment"
         android:label="DetailFragment">
         <argument
             android:name="recipeId"
