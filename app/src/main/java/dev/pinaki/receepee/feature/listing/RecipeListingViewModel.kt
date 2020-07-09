@@ -31,9 +31,6 @@ class RecipeListingViewModel(
     private val _showError = MutableLiveData<Boolean>()
     val showError: LiveData<Boolean> = _showError.distinctUntilChanged()
 
-    private val _showDetails = MutableLiveData<OneTimeEvent<Int>>()
-    val showDetails: LiveData<OneTimeEvent<Int>> = _showDetails
-
     fun syncRecipes() {
         if (showLoading.value == true) return // already loading
 
@@ -57,10 +54,6 @@ class RecipeListingViewModel(
 
             _showLoading.postValue(false)
         }
-    }
-
-    fun onRecipeItemClick(recipe: Recipe) {
-        _showDetails.value = OneTimeEvent(recipe.id)
     }
 
     companion object {

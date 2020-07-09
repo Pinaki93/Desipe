@@ -1,13 +1,14 @@
 package dev.pinaki.receepee.feature.listing
 
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import dev.pinaki.receepee.data.model.Recipe
 
 class RecipeListingAdapter : ListAdapter<Recipe, RecipeListingViewHolder>(recipeDiffCallback) {
 
-    var onClick: ((Recipe) -> Unit)? = null
+    var onClick: ((Recipe, ImageView) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeListingViewHolder {
         return RecipeListingViewHolder.from(parent)

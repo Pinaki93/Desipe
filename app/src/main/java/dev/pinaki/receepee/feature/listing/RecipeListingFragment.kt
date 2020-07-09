@@ -1,9 +1,11 @@
 package dev.pinaki.receepee.feature.listing
 
 import android.view.*
+import android.widget.ImageView
 import androidx.annotation.RawRes
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,8 +29,15 @@ class RecipeListingFragment : BaseFragment<ListingFragmentBinding>(), View.OnCli
     }
 
     override fun initializeView() {
-        recipeListingAdapter.onClick = {
-            viewModel.onRecipeItemClick(it)
+        recipeListingAdapter.onClick = { recipe: Recipe, imageView: ImageView ->
+            val imageUrl = recipe.image
+            val extras = FragmentNavigatorExtras(imageView to imageUrl)
+            val action =
+                RecipeListingFragmentDirections.actionRecipeListingFragmentToDetailFragment(
+                    recipe.id, imageUrl
+                )
+
+            findNavController().navigate(action, extras)
         }
 
         binding.buttonRetry.setOnClickListener(this)
@@ -43,6 +52,12 @@ class RecipeListingFragment : BaseFragment<ListingFragmentBinding>(), View.OnCli
                     DividerItemDecoration.VERTICAL
                 )
             )
+
+            postponeEnterTransition()
+            viewTreeObserver.addOnPreDrawListener {
+                startPostponedEnterTransition()
+                return@addOnPreDrawListener true
+            }
         }
     }
 
@@ -54,15 +69,6 @@ class RecipeListingFragment : BaseFragment<ListingFragmentBinding>(), View.OnCli
         viewModel.showLoading.observe(this, Observer { showLoading(it) })
 
         viewModel.showError.observe(this, Observer { showError(it) })
-
-        viewModel.showDetails.observe(this, Observer {
-            val recipeId = it.getContentIfNotHandled() ?: return@Observer
-            findNavController().navigate(
-                RecipeListingFragmentDirections.actionRecipeListingFragmentToDetailFragment(
-                    recipeId
-                )
-            )
-        })
     }
 
     private fun showRecipeList(it: List<Recipe>) {

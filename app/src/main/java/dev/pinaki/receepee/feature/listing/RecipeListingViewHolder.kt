@@ -2,6 +2,7 @@ package dev.pinaki.receepee.feature.listing
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import coil.transform.RoundedCornersTransformation
@@ -15,7 +16,7 @@ class RecipeListingViewHolder private constructor(
     private val recipeItemBinding: RecipeItemBinding
 ) : RecyclerView.ViewHolder(recipeItemBinding.root) {
 
-    fun bind(recipe: Recipe, onClick: ((Recipe) -> Unit)?) {
+    fun bind(recipe: Recipe, onClick: ((Recipe, ImageView) -> Unit)?) {
         with(recipeItemBinding) {
             textViewTitle.text = recipe.title
             textViewContent.text = recipe.subtitle
@@ -25,6 +26,8 @@ class RecipeListingViewHolder private constructor(
                 recipe.ingredients.size
             )
 
+            imageViewRecipe.transitionName = recipe.image
+
             imageViewRecipe.load(recipe.image) {
                 crossfade(true)
                 placeholder(R.drawable.listing_img_placeholder)
@@ -32,7 +35,7 @@ class RecipeListingViewHolder private constructor(
             }
 
             root.setOnClickListener {
-                onClick?.invoke(recipe)
+                onClick?.invoke(recipe, recipeItemBinding.imageViewRecipe)
             }
         }
     }

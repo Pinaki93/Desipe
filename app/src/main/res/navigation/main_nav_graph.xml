@@ -1,23 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/main_nav_graph"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_nav_graph"
     app:startDestination="@id/recipeListingFragment">
 
     <fragment
         android:id="@+id/recipeListingFragment"
         android:name="dev.pinaki.receepee.feature.listing.RecipeListingFragment"
-        android:label="RecipeListingFragment" >
+        android:label="RecipeListingFragment">
         <action
             android:id="@+id/action_recipeListingFragment_to_detailFragment"
-            app:destination="@id/detailFragment" />
+            app:destination="@id/detailFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit"/>
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
         android:name="dev.pinaki.receepee.feature.detail.DetailFragment"
-        android:label="DetailFragment" >
+        android:label="DetailFragment">
         <argument
             android:name="recipeId"
-            app:argType="integer"
-            android:defaultValue="0" />
+            android:defaultValue="0"
+            app:argType="integer" />
+        <argument
+            android:name="imageurl"
+            app:argType="string" />
     </fragment>
 </navigation>

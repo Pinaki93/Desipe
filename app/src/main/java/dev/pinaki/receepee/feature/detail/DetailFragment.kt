@@ -9,7 +9,10 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.transition.TransitionInflater
+import coil.ImageLoader
 import coil.api.load
+import coil.request.LoadRequest
 import dev.pinaki.receepee.R
 import dev.pinaki.receepee.common.base.BaseFragment
 import dev.pinaki.receepee.databinding.DetailsFragmentBinding
@@ -18,6 +21,7 @@ import dev.pinaki.receepee.feature.detail.heading.section.HeadingAdapter
 import dev.pinaki.receepee.feature.detail.ingredients.IngredientsAdapter
 import dev.pinaki.receepee.feature.detail.steps.RecipeStepsAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 class DetailFragment : BaseFragment<DetailsFragmentBinding>() {
 
@@ -36,6 +40,33 @@ class DetailFragment : BaseFragment<DetailsFragmentBinding>() {
     }
 
     override fun initializeView() {
+        setSharedElementTransitionOnEnter()
+        postponeEnterTransition()
+        setUpHeaderImage()
+        setUpRecyclerView()
+    }
+
+    private fun setUpHeaderImage() {
+        val imageUrl = detailFragmentArgs.imageurl
+        binding.imageViewHeader.transitionName = imageUrl
+
+        context?.run {
+            val imageLoader = ImageLoader(this)
+            val request = LoadRequest.Builder(this)
+                .data(imageUrl)
+                .target(onError = {
+                    startPostponedEnterTransition()
+                }, onSuccess = {
+                    startPostponedEnterTransition()
+                    binding.imageViewHeader.setImageDrawable(it)
+                })
+                .build()
+
+            imageLoader.execute(request)
+        }
+    }
+
+    private fun setUpRecyclerView() {
         with(binding.recyclerView) {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = ConcatAdapter(
@@ -64,6 +95,11 @@ class DetailFragment : BaseFragment<DetailsFragmentBinding>() {
         }
     }
 
+    private fun setSharedElementTransitionOnEnter() {
+        sharedElementEnterTransition = TransitionInflater.from(context)
+            .inflateTransition(R.transition.change_image_transform)
+    }
+
     override fun loadData() {
         detailsViewModel.load(detailFragmentArgs.recipeId)
     }
@@ -80,6 +116,8 @@ class DetailFragment : BaseFragment<DetailsFragmentBinding>() {
                 ingredientsAdapter.submitList(it.ingredients)
                 recipeStepAdapter.submitList(it.steps)
             } else {
+                Timber.tag(TAG)
+                    .e(IllegalAccessException("Entered details screen with a null recipe"))
                 findNavController().navigateUp()
             }
         })
@@ -96,5 +134,9 @@ class DetailFragment : BaseFragment<DetailsFragmentBinding>() {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    companion object {
+        private const val TAG = "DetailsFragment"
     }
 }
