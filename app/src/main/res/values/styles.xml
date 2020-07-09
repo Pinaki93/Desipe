@@ -21,6 +21,11 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
+    <style name="AppTheme.Splash" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_drawable</item>
+        <item name="colorPrimaryDark">@color/brand_bg_color</item>
+    </style>
+
     <!--Toolbar theming-->
     <style name="Widget.App.Toolbar" parent="Widget.MaterialComponents.Toolbar.Primary">
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.Toolbar</item>
