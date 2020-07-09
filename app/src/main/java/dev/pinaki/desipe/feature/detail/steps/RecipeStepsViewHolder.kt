@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import dev.pinaki.desipe.databinding.RecipeStepViewBinding
+import dev.pinaki.desipe.R
 
 class RecipeStepsViewHolder private constructor(private val binding: RecipeStepViewBinding) :
     RecyclerView.ViewHolder(binding.root) {

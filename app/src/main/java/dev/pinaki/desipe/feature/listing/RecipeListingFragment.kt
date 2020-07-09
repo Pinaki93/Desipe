@@ -7,8 +7,14 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import dev.pinaki.desipe.R
 import dev.pinaki.desipe.common.base.BaseFragment
+import dev.pinaki.desipe.common.util.gone
+import dev.pinaki.desipe.common.util.isVisible
+import dev.pinaki.desipe.common.util.startLoopingAnimation
+import dev.pinaki.desipe.common.util.visible
 import dev.pinaki.desipe.data.model.Recipe
 import dev.pinaki.desipe.databinding.ListingFragmentBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel

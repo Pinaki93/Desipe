@@ -4,6 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import coil.api.load
+import coil.transform.RoundedCornersTransformation
+import dev.pinaki.desipe.R
+import dev.pinaki.desipe.common.util.getRecipeDetailsText
 import dev.pinaki.desipe.common.util.px
 import dev.pinaki.desipe.data.model.Recipe
 import dev.pinaki.desipe.databinding.RecipeItemBinding
