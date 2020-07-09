@@ -25,6 +25,7 @@
 
 package dev.pinaki.desipe.di
 
+import android.os.Build
 import androidx.room.Room
 import com.squareup.moshi.Moshi
 import dev.pinaki.desipe.BuildConfig
@@ -32,10 +33,17 @@ import dev.pinaki.desipe.common.connectivity.ConnectivityDetector
 import dev.pinaki.desipe.common.connectivity.ConnectivityDetectorImpl
 import dev.pinaki.desipe.common.coroutines.DispatcherProvider
 import dev.pinaki.desipe.common.coroutines.DispatcherProviderImpl
+import dev.pinaki.desipe.common.themeswitcher.ThemeSwitchingManager
+import dev.pinaki.desipe.common.themeswitcher.ThemeSwitchingManagerImpl
 import dev.pinaki.desipe.data.repository.RecipeRepository
-import dev.pinaki.desipe.data.repository.RecipeRepositoryImpl
+import dev.pinaki.desipe.data.repository.ThemeRepository
+import dev.pinaki.desipe.data.repository.impl.RecipeRepositoryImpl
+import dev.pinaki.desipe.data.repository.impl.ThemeRepositoryImpl
 import dev.pinaki.desipe.data.source.local.DesipeDatabase
+import dev.pinaki.desipe.data.source.local.sharedprefs.SharedPreferencesManager
+import dev.pinaki.desipe.data.source.local.sharedprefs.SharedPreferencesManagerImpl
 import dev.pinaki.desipe.data.source.remote.RecipeApiService
+import dev.pinaki.desipe.feature.darktheme.DarkThemeModeChooserViewModel
 import dev.pinaki.desipe.feature.detail.DetailsViewModel
 import dev.pinaki.desipe.feature.listing.RecipeListingViewModel
 import dev.pinaki.desipe.helper.moshi.DesipeMoshiHelper
@@ -55,6 +63,8 @@ private val configModule = module {
     single(named(InjectionConstants.KEY_DATABASE_NAME)) { BuildConfig.DATABASE_NAME }
     single(named(InjectionConstants.KEY_IS_DEBUG_BUILD)) { BuildConfig.DEBUG }
     single(named(InjectionConstants.KEY_BASE_URL)) { BuildConfig.SERVER_URL }
+    single(named(InjectionConstants.KEY_PREFERENCES_NAME)) { BuildConfig.SHARED_PREFS_NAME }
+    single(named(InjectionConstants.KEY_OS_VERSION)) { Build.VERSION.SDK_INT }
 }
 
 private val databaseModule = module {
@@ -69,8 +79,13 @@ private val databaseModule = module {
     single { get<DesipeDatabase>().recipeDao() }
 }
 
-private val connectivityDetectorModule = module {
-    single<ConnectivityDetector> { ConnectivityDetectorImpl(androidApplication()) }
+private val sharedPreferencesModule = module {
+    single<SharedPreferencesManager> {
+        SharedPreferencesManagerImpl(
+            androidApplication(),
+            get(named(InjectionConstants.KEY_PREFERENCES_NAME))
+        )
+    }
 }
 
 private val httpModule = module {
@@ -103,7 +118,16 @@ private val httpModule = module {
 }
 
 private val repositoryModule = module {
-    single<RecipeRepository> { RecipeRepositoryImpl(get(), get()) }
+    single<RecipeRepository> {
+        RecipeRepositoryImpl(
+            get(),
+            get()
+        )
+    }
+
+    single<ThemeRepository> {
+        ThemeRepositoryImpl(get())
+    }
 }
 
 private val dispatcherProviderModule = module {
@@ -111,8 +135,25 @@ private val dispatcherProviderModule = module {
 }
 
 private val viewModelModule = module {
-    viewModel { RecipeListingViewModel(get(), get(), get()) }
+    viewModel {
+        RecipeListingViewModel(get(), get(), get())
+    }
     viewModel { DetailsViewModel(get()) }
+    viewModel {
+        DarkThemeModeChooserViewModel(
+            get(),
+            get(),
+            get(named(InjectionConstants.KEY_OS_VERSION))
+        )
+    }
+}
+
+private val connectivityDetectorModule = module {
+    single<ConnectivityDetector> { ConnectivityDetectorImpl(androidApplication()) }
+}
+
+private val themeSwitchingManagerModule = module {
+    single<ThemeSwitchingManager> { ThemeSwitchingManagerImpl(get()) }
 }
 
 val desipeAppModules =
@@ -121,7 +162,9 @@ val desipeAppModules =
         connectivityDetectorModule,
         databaseModule,
         httpModule,
+        sharedPreferencesModule,
         repositoryModule,
         dispatcherProviderModule,
-        viewModelModule
+        viewModelModule,
+        themeSwitchingManagerModule
     )

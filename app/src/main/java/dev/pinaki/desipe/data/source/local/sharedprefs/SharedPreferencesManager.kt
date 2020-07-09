@@ -23,12 +23,35 @@
  *
  */
 
-package dev.pinaki.desipe.di
+package dev.pinaki.desipe.data.source.local.sharedprefs
 
-object InjectionConstants {
-    const val KEY_DATABASE_NAME = "database_name"
-    const val KEY_IS_DEBUG_BUILD = "is_debug"
-    const val KEY_BASE_URL = "base_url"
-    const val KEY_PREFERENCES_NAME = "shared_preferences_name"
-    const val KEY_OS_VERSION = "os_version"
+import android.content.SharedPreferences
+
+interface SharedPreferencesManager {
+
+    fun clearPrefs()
+
+    fun containsKey(key: String?): Boolean?
+
+    fun getString(key: String?, defaultValue: String?): String?
+
+    fun getInteger(key: String?, defaultValue: Int): Int
+
+    fun getLong(key: String?, defaultValue: Long): Long
+
+    fun getFloat(key: String?, defaultValue: Float): Float
+
+    fun getBoolean(key: String?, defaultValue: Boolean): Boolean
+
+    fun putString(key: String?, value: String?)
+
+    fun putInteger(key: String?, value: Int)
+
+    fun putFloat(key: String?, value: Float)
+
+    fun putBoolean(key: String?, value: Boolean)
+
+    fun putLong(key: String?, value: Long)
+
+    fun remove(tag: String?)
 }

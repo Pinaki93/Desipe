@@ -23,35 +23,18 @@
  *
  */
 
-package dev.pinaki.desipe.data.repository
+package dev.pinaki.desipe
 
-import androidx.lifecycle.LiveData
-import dev.pinaki.desipe.data.model.Recipe
-import dev.pinaki.desipe.data.source.local.db.dao.RecipeDao
-import dev.pinaki.desipe.data.source.remote.RecipeApiService
+import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
 
-class RecipeRepositoryImpl(
-    private val recipeApiService: RecipeApiService,
-    private val recipeDao: RecipeDao
-) : RecipeRepository {
+class SplashActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setTheme(R.style.AppTheme)
 
-    override fun getAllRecipes(): LiveData<List<Recipe>> {
-        return recipeDao.getAllRecipes()
-    }
-
-    override fun getRecipeById(id: Int): LiveData<Recipe> {
-        return recipeDao.getRecipeForId(id)
-    }
-
-    override suspend fun syncRecipes(): List<Recipe> {
-        return recipeApiService.getAllRecipes()
-    }
-
-    override suspend fun deleteAllRecipes() {
-        recipeDao.deleteAll()
-    }
-
-    override suspend fun saveAllRecipes(recipes: List<Recipe>) {
-        recipeDao.saveAllRecipes(recipes)
+        startActivity(Intent(this, ContainerActivity::class.java))
+        finish()
     }
 }

@@ -33,7 +33,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import androidx.annotation.LayoutRes
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -42,15 +41,9 @@ import dev.pinaki.desipe.R
 abstract class BaseBottomSheetDialogFragment<B : ViewBinding> : BottomSheetDialogFragment(),
     DialogInterface.OnShowListener {
 
-    private lateinit var binding: B
+    protected lateinit var binding: B
 
-    //region callback methods (abstract and open)
-    @LayoutRes
-    protected abstract fun getLayout(): Int
-
-    protected abstract fun getBinding(inflater: LayoutInflater, layout: Int, parent: ViewGroup?): B
-
-    protected abstract fun injectDependencies()
+    protected abstract fun initializeBinding(inflater: LayoutInflater, parent: ViewGroup?): B
 
     protected abstract fun initializeView()
 
@@ -65,9 +58,7 @@ abstract class BaseBottomSheetDialogFragment<B : ViewBinding> : BottomSheetDialo
     open fun onDialogCancel() {
 
     }
-    //endregion
 
-    //region lifecycle methods
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
         with(dialog) {
@@ -76,11 +67,6 @@ abstract class BaseBottomSheetDialogFragment<B : ViewBinding> : BottomSheetDialo
         }
 
         return dialog
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        injectDependencies()
     }
 
     override fun onCancel(dialog: DialogInterface) {
@@ -93,7 +79,7 @@ abstract class BaseBottomSheetDialogFragment<B : ViewBinding> : BottomSheetDialo
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = getBinding(inflater = inflater, layout = getLayout(), parent = container)
+        binding = initializeBinding(inflater = inflater, parent = container)
         return binding.root
     }
 
@@ -128,15 +114,4 @@ abstract class BaseBottomSheetDialogFragment<B : ViewBinding> : BottomSheetDialo
             contentView.setBackgroundResource(R.drawable.bg_top_rouned_corners_16dp)
         }
     }
-    //endregion
-
-    //region utility methods
-    fun getBindingInstance(): B {
-        if (!::binding.isInitialized)
-            throw IllegalStateException("Attempt to get binding instance before creating it")
-
-        return binding
-    }
-
-    //endregion
 }

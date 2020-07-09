@@ -40,6 +40,9 @@
             app:exitAnim="@anim/fragment_fade_exit"
             app:popEnterAnim="@anim/fragment_fade_enter"
             app:popExitAnim="@anim/fragment_fade_exit"/>
+        <action
+            android:id="@+id/action_recipeListingFragment_to_darkThemeModeChooserBottomSheetDialogFragment"
+            app:destination="@id/darkThemeModeChooserBottomSheetDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
@@ -53,4 +56,8 @@
             android:name="imageurl"
             app:argType="string" />
     </fragment>
+    <dialog
+        android:id="@+id/darkThemeModeChooserBottomSheetDialogFragment"
+        android:name="dev.pinaki.desipe.feature.darktheme.DarkThemeModeChooserBottomSheetDialogFragment"
+        android:label="DarkThemeModeChooserBottomSheetDialogFragment" />
 </navigation>

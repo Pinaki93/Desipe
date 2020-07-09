@@ -30,4 +30,10 @@
         android:icon="@drawable/ic_baseline_sync_24"
         app:showAsAction="always"
         android:title="@string/refresh"/>
+
+    <item
+        android:id="@+id/menu_item_change_theme"
+        android:icon="@drawable/ic_baseline_wb_sunny_24"
+        app:showAsAction="always"
+        android:title="@string/change_theme"/>
 </menu>

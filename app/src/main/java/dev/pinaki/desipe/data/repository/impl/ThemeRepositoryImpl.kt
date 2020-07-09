@@ -23,12 +23,36 @@
  *
  */
 
-package dev.pinaki.desipe.di
+package dev.pinaki.desipe.data.repository.impl
 
-object InjectionConstants {
-    const val KEY_DATABASE_NAME = "database_name"
-    const val KEY_IS_DEBUG_BUILD = "is_debug"
-    const val KEY_BASE_URL = "base_url"
-    const val KEY_PREFERENCES_NAME = "shared_preferences_name"
-    const val KEY_OS_VERSION = "os_version"
+import dev.pinaki.desipe.common.ds.DarkThemeMode
+import dev.pinaki.desipe.data.repository.ThemeRepository
+import dev.pinaki.desipe.data.source.local.sharedprefs.SharedPreferencesManager
+
+class ThemeRepositoryImpl constructor(
+    private val sharedPreferencesManager: SharedPreferencesManager
+) : ThemeRepository {
+
+    // Theme constants
+    override fun getCurrentDarkThemeMode(): DarkThemeMode? {
+        return DarkThemeMode.fromString(
+            sharedPreferencesManager.getString(
+                KEY_CURRENT_THEME,
+                DarkThemeMode.SYSTEM.name
+            )
+        )
+    }
+
+    override fun setCurrentDarkThemeMode(theme: DarkThemeMode) {
+        sharedPreferencesManager.putString(KEY_CURRENT_THEME, theme.name)
+    }
+
+    companion object {
+        const val KEY_CURRENT_THEME = "current_theme"
+
+        const val THEME_Light = "Light"
+        const val THEME_Dark = "Dark"
+        const val THEME_Auto = "Auto"
+        const val THEME_System = "System"
+    }
 }

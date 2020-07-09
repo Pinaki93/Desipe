@@ -23,12 +23,36 @@
  *
  */
 
-package dev.pinaki.desipe.di
+package dev.pinaki.desipe.data.repository.impl
 
-object InjectionConstants {
-    const val KEY_DATABASE_NAME = "database_name"
-    const val KEY_IS_DEBUG_BUILD = "is_debug"
-    const val KEY_BASE_URL = "base_url"
-    const val KEY_PREFERENCES_NAME = "shared_preferences_name"
-    const val KEY_OS_VERSION = "os_version"
+import androidx.lifecycle.LiveData
+import dev.pinaki.desipe.data.model.Recipe
+import dev.pinaki.desipe.data.repository.RecipeRepository
+import dev.pinaki.desipe.data.source.local.db.dao.RecipeDao
+import dev.pinaki.desipe.data.source.remote.RecipeApiService
+
+class RecipeRepositoryImpl(
+    private val recipeApiService: RecipeApiService,
+    private val recipeDao: RecipeDao
+) : RecipeRepository {
+
+    override fun getAllRecipes(): LiveData<List<Recipe>> {
+        return recipeDao.getAllRecipes()
+    }
+
+    override fun getRecipeById(id: Int): LiveData<Recipe> {
+        return recipeDao.getRecipeForId(id)
+    }
+
+    override suspend fun syncRecipes(): List<Recipe> {
+        return recipeApiService.getAllRecipes()
+    }
+
+    override suspend fun deleteAllRecipes() {
+        recipeDao.deleteAll()
+    }
+
+    override suspend fun saveAllRecipes(recipes: List<Recipe>) {
+        recipeDao.saveAllRecipes(recipes)
+    }
 }

@@ -92,9 +92,9 @@ class RecipeListingFragment : BaseFragment<ListingFragmentBinding>(), View.OnCli
     override fun observeDataAndActions() {
         viewModel.allRecipes.observe(this, Observer { showRecipeList(it) })
 
-        viewModel.showOffline.observe(this, Observer { showOfflineView(it) })
-
         viewModel.showLoading.observe(this, Observer { showLoading(it) })
+
+        viewModel.showOffline.observe(this, Observer { showOfflineView(it) })
 
         viewModel.showError.observe(this, Observer { showError(it) })
     }
@@ -182,8 +182,17 @@ class RecipeListingFragment : BaseFragment<ListingFragmentBinding>(), View.OnCli
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.menu_item_refrsh) {
             viewModel.syncRecipes()
+        } else if (item.itemId == R.id.menu_item_change_theme) {
+            showThemeChooser()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun showThemeChooser() {
+        findNavController().navigate(
+            RecipeListingFragmentDirections
+                .actionRecipeListingFragmentToDarkThemeModeChooserBottomSheetDialogFragment()
+        )
     }
 
     override fun onClick(view: View?) {

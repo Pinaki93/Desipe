@@ -23,12 +23,12 @@
  *
  */
 
-package dev.pinaki.desipe.di
+package dev.pinaki.desipe.data.repository
 
-object InjectionConstants {
-    const val KEY_DATABASE_NAME = "database_name"
-    const val KEY_IS_DEBUG_BUILD = "is_debug"
-    const val KEY_BASE_URL = "base_url"
-    const val KEY_PREFERENCES_NAME = "shared_preferences_name"
-    const val KEY_OS_VERSION = "os_version"
+import dev.pinaki.desipe.common.ds.DarkThemeMode
+
+interface ThemeRepository {
+    fun getCurrentDarkThemeMode(): DarkThemeMode?
+
+    fun setCurrentDarkThemeMode(theme: DarkThemeMode)
 }

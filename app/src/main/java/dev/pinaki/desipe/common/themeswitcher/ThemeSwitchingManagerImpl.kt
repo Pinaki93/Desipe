@@ -25,13 +25,17 @@
 
 package dev.pinaki.desipe.common.themeswitcher
 
+import androidx.appcompat.app.AppCompatDelegate
+import dev.pinaki.desipe.common.ds.DarkThemeMode
+import dev.pinaki.desipe.data.repository.ThemeRepository
+
 @Suppress("MemberVisibilityCanBePrivate")
 class ThemeSwitchingManagerImpl constructor(
-    /*val themeRepository: ThemeRepository*/
+    val themeRepository: ThemeRepository
 ) : ThemeSwitchingManager {
 
     override fun apply() {
-        /*val nightMode = when (themeRepository.getCurrentDarkThemeMode()) {
+        val nightMode = when (themeRepository.getCurrentDarkThemeMode()) {
             DarkThemeMode.LIGHT -> AppCompatDelegate.MODE_NIGHT_NO
             DarkThemeMode.DARK -> AppCompatDelegate.MODE_NIGHT_YES
             DarkThemeMode.AUTO -> AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY
@@ -41,6 +45,6 @@ class ThemeSwitchingManagerImpl constructor(
 
         if (nightMode == -1) return
 
-        AppCompatDelegate.setDefaultNightMode(nightMode)*/
+        AppCompatDelegate.setDefaultNightMode(nightMode)
     }
 }
