@@ -2,6 +2,9 @@
 <img src="ic_launcher-playstore.png" width = 150>
 </p>
 
+<p align:"center">
+  <a href="https://img.shields.io/badge/License-MIT-yellow.svg" align:"center"><img src="https://img.shields.io/badge/License-MIT-yellow.svg"></a>
+</p>
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/Pinaki93/Desipe/blob/master/LICENSE)
 
 # Desipe
