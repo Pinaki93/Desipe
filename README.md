@@ -1,5 +1,7 @@
 # Desipe
-An Indian Recipe App 🍜  built on MVVM architecture 🚀 with Kotlin, LiveData, Jetpack Navigation, Room, View Binding, Koin Service Locator, Coil, Retrofit, OkHTTP and Material Components
+Desipe is an Indian Recipe App 🍜 that I created to demonstrate some of the commonly used libraries in Android development.
+
+![](ic_launcher-playstore.png)
 
 ## License
 ```
