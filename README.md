@@ -2,6 +2,8 @@
 <img src="ic_launcher-playstore.png" width = 150>
 </p>
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/Pinaki93/Desipe/blob/master/LICENSE)
+
 # Desipe
 Desipe is an Indian Recipe App 🍜 that I created to demonstrate some of the commonly used libraries in Android development.
 ## License
