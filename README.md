@@ -2,6 +2,11 @@
 <img src="ic_launcher-playstore.png" width = 150>
 </p>
 
+<p align="center">
+  <a href="https://img.shields.io/badge/License-MIT-yellow.svg"><img src="https://img.shields.io/badge/License-MIT-yellow.svg"></a>
+  <a href="https://badges.frapsoft.com/os/v2/open-source.svg?v=103"><img src="https://badges.frapsoft.com/os/v2/open-source.svg?v=103"></a>
+</p>
+
 # Desipe
 Desipe is an Indian Recipe App 🍜 that I created to demonstrate some of the commonly used libraries in Android development.
 ## License
