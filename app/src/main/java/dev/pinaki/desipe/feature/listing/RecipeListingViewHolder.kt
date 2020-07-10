@@ -38,29 +38,31 @@ import dev.pinaki.desipe.data.model.Recipe
 import dev.pinaki.desipe.databinding.RecipeItemBinding
 
 class RecipeListingViewHolder private constructor(
-    private val recipeItemBinding: RecipeItemBinding
-) : RecyclerView.ViewHolder(recipeItemBinding.root) {
+    private val binding: RecipeItemBinding
+) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(recipe: Recipe, onClick: ((Recipe, ImageView) -> Unit)?) {
-        with(recipeItemBinding) {
+        with(binding) {
             textViewTitle.text = recipe.title
             textViewContent.text = recipe.subtitle
-            textViewRecipeDetails.text = getRecipeDetailsText(
-                textViewRecipeDetails.context,
-                recipe.steps.size,
-                recipe.ingredients.size
-            )
+            textViewRecipeDetails.text =
+                getRecipeDetailsText(
+                    textViewRecipeDetails.context,
+                    recipe.steps.size,
+                    recipe.ingredients.size
+                )
 
-            imageViewRecipe.transitionName = recipe.image
+            val imageUrl = recipe.image
+            imageViewRecipe.transitionName = imageUrl
 
-            imageViewRecipe.load(recipe.image) {
+            imageViewRecipe.load(imageUrl) {
                 crossfade(true)
                 placeholder(R.drawable.listing_img_placeholder)
                 transformations(RoundedCornersTransformation(4f.px))
             }
 
-            root.setOnClickListener {
-                onClick?.invoke(recipe, recipeItemBinding.imageViewRecipe)
+            container.setOnClickListener {
+                onClick?.invoke(recipe, binding.imageViewRecipe)
             }
         }
     }

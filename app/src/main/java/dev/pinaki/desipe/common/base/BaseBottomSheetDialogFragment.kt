@@ -49,15 +49,11 @@ abstract class BaseBottomSheetDialogFragment<B : ViewBinding> : BottomSheetDialo
 
     protected abstract fun observeDataAndActions()
 
-    protected open fun loadData() {
-
-    }
+    protected open fun loadData() {}
 
     open fun makeTopCornersRounded() = false
 
-    open fun onDialogCancel() {
-
-    }
+    open fun onDialogCancel() {}
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)

@@ -33,7 +33,6 @@ class ThemeRepositoryImpl constructor(
     private val sharedPreferencesManager: SharedPreferencesManager
 ) : ThemeRepository {
 
-    // Theme constants
     override fun getCurrentDarkThemeMode(): DarkThemeMode? {
         return DarkThemeMode.fromString(
             sharedPreferencesManager.getString(
@@ -49,10 +48,5 @@ class ThemeRepositoryImpl constructor(
 
     companion object {
         const val KEY_CURRENT_THEME = "current_theme"
-
-        const val THEME_Light = "Light"
-        const val THEME_Dark = "Dark"
-        const val THEME_Auto = "Auto"
-        const val THEME_System = "System"
     }
 }

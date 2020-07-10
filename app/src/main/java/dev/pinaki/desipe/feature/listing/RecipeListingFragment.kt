@@ -36,10 +36,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import dev.pinaki.desipe.R
 import dev.pinaki.desipe.common.base.BaseFragment
-import dev.pinaki.desipe.common.util.gone
-import dev.pinaki.desipe.common.util.isVisible
-import dev.pinaki.desipe.common.util.startLoopingAnimation
-import dev.pinaki.desipe.common.util.visible
+import dev.pinaki.desipe.common.util.*
 import dev.pinaki.desipe.data.model.Recipe
 import dev.pinaki.desipe.databinding.ListingFragmentBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -57,6 +54,11 @@ class RecipeListingFragment : BaseFragment<ListingFragmentBinding>(), View.OnCli
     }
 
     override fun initializeView() {
+        setUpRecyclerView()
+        binding.buttonRetry.setOnClickListener(this)
+    }
+
+    private fun setUpRecyclerView() {
         recipeListingAdapter.onClick = { recipe: Recipe, imageView: ImageView ->
             val imageUrl = recipe.image
             val extras = FragmentNavigatorExtras(imageView to imageUrl)
@@ -67,8 +69,6 @@ class RecipeListingFragment : BaseFragment<ListingFragmentBinding>(), View.OnCli
 
             findNavController().navigate(action, extras)
         }
-
-        binding.buttonRetry.setOnClickListener(this)
 
         with(binding.recyclerView) {
             layoutManager = LinearLayoutManager(requireContext())
@@ -81,6 +81,7 @@ class RecipeListingFragment : BaseFragment<ListingFragmentBinding>(), View.OnCli
                 )
             )
 
+            // set up transition on the recyclerview
             postponeEnterTransition()
             viewTreeObserver.addOnPreDrawListener {
                 startPostponedEnterTransition()
@@ -90,13 +91,15 @@ class RecipeListingFragment : BaseFragment<ListingFragmentBinding>(), View.OnCli
     }
 
     override fun observeDataAndActions() {
-        viewModel.allRecipes.observe(this, Observer { showRecipeList(it) })
+        with(viewModel) {
+            allRecipes.observe(this@RecipeListingFragment, Observer { showRecipeList(it) })
 
-        viewModel.showLoading.observe(this, Observer { showLoading(it) })
+            showLoading.observe(this@RecipeListingFragment, Observer { showLoading(it) })
 
-        viewModel.showOffline.observe(this, Observer { showOfflineView(it) })
+            showOffline.observe(this@RecipeListingFragment, Observer { showOfflineView(it) })
 
-        viewModel.showError.observe(this, Observer { showError(it) })
+            showError.observe(this@RecipeListingFragment, Observer { showError(it) })
+        }
     }
 
     private fun showRecipeList(it: List<Recipe>) {
@@ -104,17 +107,19 @@ class RecipeListingFragment : BaseFragment<ListingFragmentBinding>(), View.OnCli
     }
 
     private fun showOfflineView(shouldShow: Boolean) {
-        showDataLoadingView(true)
+        showDataLoadingView(shouldShow)
         if (shouldShow) {
             startLoopingAnimation(R.raw.no_internet_connection)
 
-            binding.tvHeadline.visible()
-            binding.tvHeadline.text = getString(R.string.title_not_connected_to_internet)
+            with(binding) {
+                tvHeadline.visible()
+                tvHeadline.text = getString(R.string.title_not_connected_to_internet)
 
-            binding.tvContent.visible()
-            binding.tvContent.text = getString(R.string.msg_not_connected_to_internet)
+                tvContent.visible()
+                tvContent.text = getString(R.string.msg_not_connected_to_internet)
 
-            binding.buttonRetry.visible()
+                buttonRetry.visible()
+            }
         }
     }
 
@@ -123,10 +128,12 @@ class RecipeListingFragment : BaseFragment<ListingFragmentBinding>(), View.OnCli
         if (shouldShow) {
             startLoopingAnimation(R.raw.recipe_loading)
 
-            binding.tvHeadline.visible()
-            binding.tvHeadline.text = getString(R.string.loading_data)
+            with(binding) {
+                tvHeadline.visible()
+                tvHeadline.text = getString(R.string.loading_data)
 
-            binding.tvContent.gone()
+                tvContent.gone()
+            }
         }
     }
 
@@ -135,33 +142,43 @@ class RecipeListingFragment : BaseFragment<ListingFragmentBinding>(), View.OnCli
         if (shouldShow) {
             startLoopingAnimation(R.raw.no_internet_connection)
 
-            binding.tvHeadline.visible()
-            binding.tvHeadline.text = getString(R.string.title_server_error)
+            with(binding) {
+                tvHeadline.visible()
+                tvHeadline.text = getString(R.string.title_server_error)
 
-            binding.tvContent.visible()
-            binding.tvContent.text = getString(R.string.msg_error_occurred_while_loading_data)
+                tvContent.visible()
+                tvContent.text = getString(R.string.msg_error_occurred_while_loading_data)
 
-            binding.buttonRetry.visible()
+                buttonRetry.visible()
+            }
         }
     }
 
     private fun startLoopingAnimation(@RawRes resource: Int) {
-        if (!binding.animationView.isVisible())
-            binding.animationView.visible()
+        with(binding) {
+            if (!animationView.isVisible())
+                animationView.visible()
 
-        binding.animationView.startLoopingAnimation(resource)
+            animationView.startLoopingAnimation(resource)
+        }
     }
 
     private fun showDataLoadingView(shouldShow: Boolean) {
-        if (shouldShow) {
-            binding.dataLoadingView.visible()
-            binding.recyclerView.gone()
-            binding.toolbar.gone()
-            binding.buttonRetry.gone()
-        } else {
-            binding.dataLoadingView.gone()
-            binding.recyclerView.visible()
-            binding.toolbar.visible()
+        with(binding) {
+            if (shouldShow) {
+                if (!dataLoadingView.isVisible()) {
+                    dataLoadingView.visible()
+                    recyclerView.gone()
+                    toolbar.gone()
+                    buttonRetry.gone()
+                }
+            } else {
+                if (!dataLoadingView.isGone()) {
+                    dataLoadingView.gone()
+                    recyclerView.visible()
+                    toolbar.visible()
+                }
+            }
         }
     }
 

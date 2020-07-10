@@ -40,13 +40,13 @@ import coil.api.load
 import coil.request.LoadRequest
 import dev.pinaki.desipe.R
 import dev.pinaki.desipe.common.base.BaseFragment
+import dev.pinaki.desipe.data.model.Recipe
 import dev.pinaki.desipe.databinding.DetailsFragmentBinding
 import dev.pinaki.desipe.feature.detail.heading.recipe.RecipeHeadingAdapter
 import dev.pinaki.desipe.feature.detail.heading.section.HeadingAdapter
 import dev.pinaki.desipe.feature.detail.ingredients.IngredientsAdapter
 import dev.pinaki.desipe.feature.detail.steps.RecipeStepsAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 class DetailFragment : BaseFragment<DetailsFragmentBinding>() {
 
@@ -55,7 +55,7 @@ class DetailFragment : BaseFragment<DetailsFragmentBinding>() {
 
     private val recipeHeadingAdapter = RecipeHeadingAdapter()
     private val recipeStepAdapter = RecipeStepsAdapter()
-    private val ingredientsAdapter = IngredientsAdapter()
+    private val recipeIngredientsAdapter = IngredientsAdapter()
 
     override fun initializeBinding(
         inflater: LayoutInflater,
@@ -97,7 +97,7 @@ class DetailFragment : BaseFragment<DetailsFragmentBinding>() {
             adapter = ConcatAdapter(
                 recipeHeadingAdapter,
                 HeadingAdapter(getString(R.string.ingredients)),
-                ingredientsAdapter,
+                recipeIngredientsAdapter,
                 HeadingAdapter(getString(R.string.steps)),
                 recipeStepAdapter
             )
@@ -130,22 +130,19 @@ class DetailFragment : BaseFragment<DetailsFragmentBinding>() {
     }
 
     override fun observeDataAndActions() {
-        detailsViewModel.recipe.observe(this, Observer {
-            if (it != null) {
-                binding.imageViewHeader.load(it.image)
+        detailsViewModel.recipe.observe(this, Observer { showDetails(it) })
+    }
 
-                val title = it.title
-                recipeHeadingAdapter.headingAndDescription = Pair(title, it.subtitle)
-                binding.collapsingToolbarHeader.title = title
+    private fun showDetails(recipe: Recipe) {
+        with(recipe) {
+            binding.imageViewHeader.load(image)
 
-                ingredientsAdapter.submitList(it.ingredients)
-                recipeStepAdapter.submitList(it.steps)
-            } else {
-                Timber.tag(TAG)
-                    .e(IllegalAccessException("Entered details screen with a null recipe"))
-                findNavController().navigateUp()
-            }
-        })
+            recipeHeadingAdapter.headingAndDescription = Pair(title, subtitle)
+            binding.collapsingToolbarHeader.title = title
+
+            recipeIngredientsAdapter.submitList(recipe.ingredients)
+            recipeStepAdapter.submitList(recipe.steps)
+        }
     }
 
     override fun getToolbarInstance() = binding.toolbar
@@ -154,11 +151,15 @@ class DetailFragment : BaseFragment<DetailsFragmentBinding>() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
-            findNavController().navigateUp()
+            onBackPress()
             return true
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun onBackPress() {
+        findNavController().navigateUp()
     }
 
     companion object {

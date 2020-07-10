@@ -41,7 +41,6 @@ abstract class BaseFragment<B : ViewBinding> : Fragment() {
 
     protected lateinit var binding: B
 
-    //region callback methods (abstract and open)
     protected abstract fun initializeBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -53,22 +52,16 @@ abstract class BaseFragment<B : ViewBinding> : Fragment() {
 
     protected abstract fun getToolbarInstance(): Toolbar?
 
-    protected open fun loadData() {
+    protected open fun loadData() {}
 
-    }
-
-    protected open fun performActionsOnSavedState(savedStateHandle: SavedStateHandle?) {
-
-    }
+    protected open fun performActionsOnSavedState(savedStateHandle: SavedStateHandle?) {}
 
     protected open fun getToolbarTitle(): String? = null
 
     protected open fun fragmentHasOptionsMenu(): Boolean {
         return false
     }
-    //endregion
 
-    //region lifecycle related methods
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(fragmentHasOptionsMenu())
@@ -83,7 +76,7 @@ abstract class BaseFragment<B : ViewBinding> : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = initializeBinding(inflater,container)
+        binding = initializeBinding(inflater, container)
         return binding.root
     }
 
@@ -99,5 +92,4 @@ abstract class BaseFragment<B : ViewBinding> : Fragment() {
         observeDataAndActions()
         performActionsOnSavedState(findNavController().currentBackStackEntry?.savedStateHandle)
     }
-    //endregion
 }

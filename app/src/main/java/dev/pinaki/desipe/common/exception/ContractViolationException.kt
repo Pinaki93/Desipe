@@ -23,18 +23,10 @@
  *
  */
 
-package dev.pinaki.desipe
+package dev.pinaki.desipe.common.exception
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-
-class SplashActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setTheme(R.style.AppTheme)
-
-        startActivity(Intent(this, ContainerActivity::class.java))
-        finish()
-    }
-}
+/**
+ * Exception to be thrown when a given contract between any two components
+ * such as View and ViewModel, Repository and ViewModel etc are violated
+ */
+class ContractViolationException(message: String) : RuntimeException(message)

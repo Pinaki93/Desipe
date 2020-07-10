@@ -23,33 +23,14 @@
  *
  */
 
-package dev.pinaki.desipe.feature.detail.heading.recipe
+package dev.pinaki.desipe.common.coroutine
 
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import dev.pinaki.desipe.databinding.RecipeHeadingViewBinding
+import kotlinx.coroutines.Dispatchers
 
-class RecipeHeadingViewHolder private constructor(private val binding: RecipeHeadingViewBinding) :
-    RecyclerView.ViewHolder(binding.root) {
+class DispatcherProviderImpl : DispatcherProvider {
+    override fun io() = Dispatchers.IO
 
-    fun bind(recipeHeading: String, recipeDescription: String) {
-        with(binding) {
-            textViewTitle.text = recipeHeading
-            textViewContent.text = recipeDescription
-        }
-    }
+    override fun main() = Dispatchers.Main
 
-    companion object {
-        @JvmStatic
-        fun from(parent: ViewGroup): RecipeHeadingViewHolder {
-            return RecipeHeadingViewHolder(
-                RecipeHeadingViewBinding.inflate(
-                    LayoutInflater.from(
-                        parent.context
-                    ), parent, false
-                )
-            )
-        }
-    }
+    override fun default() = Dispatchers.Default
 }

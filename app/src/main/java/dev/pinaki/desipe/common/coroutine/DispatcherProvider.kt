@@ -23,7 +23,7 @@
  *
  */
 
-package dev.pinaki.desipe.common.coroutines
+package dev.pinaki.desipe.common.coroutine
 
 import kotlinx.coroutines.CoroutineDispatcher
 

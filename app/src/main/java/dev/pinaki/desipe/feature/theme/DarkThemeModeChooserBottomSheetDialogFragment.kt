@@ -1,9 +1,8 @@
-package dev.pinaki.desipe.feature.darktheme
+package dev.pinaki.desipe.feature.theme
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.lifecycle.map
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dev.pinaki.desipe.common.base.BaseBottomSheetDialogFragment
@@ -38,15 +37,17 @@ class DarkThemeModeChooserBottomSheetDialogFragment :
 
     @Suppress("NestedLambdaShadowedImplicitParameter")
     override fun observeDataAndActions() {
-        viewModel.modes
-            .map { it.map { getString(it) } }
-            .observe(this, Observer {
-                adapter.submitList(it)
-            })
+        viewModel.modes.observe(this, Observer { showThemeList(it) })
 
-        viewModel.dismiss.observe(this, Observer {
-            findNavController().navigateUp()
-        })
+        viewModel.dismiss.observe(this, Observer { dismissViewModel() })
+    }
+
+    private fun showThemeList(list: List<Int>) {
+        adapter.submitList(list.map { getString(it) })
+    }
+
+    private fun dismissViewModel() {
+        findNavController().navigateUp()
     }
 
     override fun makeTopCornersRounded() = true

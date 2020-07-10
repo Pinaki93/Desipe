@@ -58,6 +58,6 @@
     </fragment>
     <dialog
         android:id="@+id/darkThemeModeChooserBottomSheetDialogFragment"
-        android:name="dev.pinaki.desipe.feature.darktheme.DarkThemeModeChooserBottomSheetDialogFragment"
+        android:name="dev.pinaki.desipe.feature.theme.DarkThemeModeChooserBottomSheetDialogFragment"
         android:label="DarkThemeModeChooserBottomSheetDialogFragment" />
 </navigation>

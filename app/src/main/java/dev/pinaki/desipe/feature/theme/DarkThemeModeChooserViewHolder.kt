@@ -23,14 +23,38 @@
  *
  */
 
-package dev.pinaki.desipe.common.coroutines
+package dev.pinaki.desipe.feature.theme
 
-import kotlinx.coroutines.Dispatchers
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import dev.pinaki.desipe.databinding.DarkModeChooserItemBinding
 
-class DispatcherProviderImpl : DispatcherProvider {
-    override fun io() = Dispatchers.IO
+class DarkThemeModeChooserViewHolder private constructor(
+    private val binding: DarkModeChooserItemBinding
+) : RecyclerView.ViewHolder(binding.root) {
 
-    override fun main() = Dispatchers.Main
+    fun setItem(item: String, clickListener: ((Int) -> Unit)?) {
+        with(binding.tvContent) {
+            text = item
+            setOnClickListener {
+                clickListener?.invoke(bindingAdapterPosition)
+            }
+        }
+        binding.tvContent.text = item
+    }
 
-    override fun default() = Dispatchers.Default
+    companion object {
+        @JvmStatic
+        fun from(parent: ViewGroup): DarkThemeModeChooserViewHolder {
+            return DarkThemeModeChooserViewHolder(
+                DarkModeChooserItemBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+        }
+    }
+
 }

@@ -23,10 +23,20 @@
  *
  */
 
-package dev.pinaki.desipe.common
+package dev.pinaki.desipe.feature.splash
 
-/**
- * Exception to be thrown when a given contract between any two components
- * such as View and ViewModel, Repository and ViewModel etc are violated
- */
-class ContractViolationException(message: String) : RuntimeException(message)
+import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import dev.pinaki.desipe.ContainerActivity
+import dev.pinaki.desipe.R
+
+class SplashActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setTheme(R.style.AppTheme)
+
+        startActivity(Intent(this, ContainerActivity::class.java))
+        finish()
+    }
+}

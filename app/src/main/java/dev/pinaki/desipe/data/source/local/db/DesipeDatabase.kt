@@ -23,7 +23,7 @@
  *
  */
 
-package dev.pinaki.desipe.data.source.local
+package dev.pinaki.desipe.data.source.local.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

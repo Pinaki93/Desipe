@@ -1,4 +1,4 @@
-package dev.pinaki.desipe.feature.darktheme
+package dev.pinaki.desipe.feature.theme
 
 import android.os.Build
 import androidx.lifecycle.LiveData

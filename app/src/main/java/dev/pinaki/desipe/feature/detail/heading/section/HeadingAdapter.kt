@@ -40,5 +40,4 @@ class HeadingAdapter(private val heading: String) : RecyclerView.Adapter<Heading
     override fun onBindViewHolder(holder: HeadingViewHolder, position: Int) {
         holder.bind(heading)
     }
-
 }

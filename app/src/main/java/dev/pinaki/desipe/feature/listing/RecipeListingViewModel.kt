@@ -27,7 +27,7 @@ package dev.pinaki.desipe.feature.listing
 
 import androidx.lifecycle.*
 import dev.pinaki.desipe.common.connectivity.ConnectivityDetector
-import dev.pinaki.desipe.common.coroutines.DispatcherProvider
+import dev.pinaki.desipe.common.coroutine.DispatcherProvider
 import dev.pinaki.desipe.data.repository.RecipeRepository
 import kotlinx.coroutines.launch
 import timber.log.Timber
