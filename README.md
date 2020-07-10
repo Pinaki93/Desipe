@@ -1,10 +1,10 @@
 # Desipe
-<p>
-<img src="ic_launcher-playstore.png" width = 150 align = "left">
-
-Desipe is an Indian Recipe App 🍜 that I created to demonstrate some of the commonly used libraries in Android development.
+<p align="center">
+<img src="ic_launcher-playstore.png" width = 150>
+#Desipe
 </p>
 
+Desipe is an Indian Recipe App 🍜 that I created to demonstrate some of the commonly used libraries in Android development.
 ## License
 ```
 MIT License
