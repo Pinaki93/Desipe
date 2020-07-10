@@ -56,7 +56,8 @@ android {
             buildConfigField "String", 'SHARED_PREFS_NAME', "\"${buildProperties.getProperty("sharedPrefsName")}\""
         }
         release {
-            minifyEnabled false
+            minifyEnabled true
+            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 
             buildConfigField "String", 'SERVER_URL', "\"${buildProperties.getProperty("serverUrl")}\""
