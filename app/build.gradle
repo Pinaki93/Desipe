@@ -81,6 +81,14 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
+
+    // an issue is occurring while using kotlin-coroutines-core
+    // and kotlin-coroutines-test dependencies
+    // this seems to be fixing the issue
+    packagingOptions {
+        exclude 'META-INF/AL2.0'
+        exclude 'META-INF/LGPL2.1'
+    }
 }
 
 dependencies {
@@ -104,7 +112,9 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
     implementation "com.airbnb.android:lottie:3.4.1"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7"
+
+    def coroutine_version = "1.3.7"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutine_version}"
 
     implementation "io.coil-kt:coil:0.11.0"
 
@@ -131,4 +141,7 @@ dependencies {
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.arch.core:core-testing:2.1.0'
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutine_version}"
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:${coroutine_version}"
 }

@@ -23,27 +23,23 @@
  *
  */
 
-package dev.pinaki.desipe
+package dev.pinaki.desipe.data.source.local.db
 
-import androidx.test.platform.app.InstrumentationRegistry
+import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
-
+import androidx.test.platform.app.InstrumentationRegistry
+import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
 
-import org.junit.Assert.*
-
-/**
- * Instrumented test, which will execute on an Android device.
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
 @RunWith(AndroidJUnit4::class)
-class ExampleInstrumentedTest {
+class DesipeDatabaseTest {
+
     @Test
-    fun useAppContext() {
-        // Context of the app under test.
-        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("dev.pinaki.receepee", appContext.packageName)
+    fun testGetRecipeDao() {
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        val database = Room.inMemoryDatabaseBuilder(context, DesipeDatabase::class.java).build()
+        val recipeDao = database.recipeDao()
+        assertNotNull(recipeDao)
     }
 }
