@@ -54,10 +54,12 @@ Data is a dummy set of JSON and images hosted on a github page. Most of the cont
 Support for Dark Theme is available. However, there is a small bug for Android 10 and above that the theme doesn't get updated when user selects **Follow System** from the bottom sheet. Upon killing the app once and returning back, the theme gets updated.
 
 ## Screenshots 📷
+<h4>Light Theme:</h4>
 <img src="art/listing-light.png" height="500">
+<img src="art/details-top-light.png" height="500">
+<h4>Dark Theme:</h4>
 <img src="art/listing-dark.png" height="500">
-<img src="art/details-light.png" height="500">
-<img src="art/detailstop--dark.png" height="500">
+<img src="art/details-dark.png" height="500">
 
 
 ## License
