@@ -26,7 +26,7 @@ Transitions:\
 \
 Threading:\
 🚀 [Kotlin Coroutine](https://github.com/Kotlin/kotlinx.coroutines)\
-
+\
 Service Locator:\
 🚀 [Koin](https://github.com/InsertKoinIO/koin)\
 \
