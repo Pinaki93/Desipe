@@ -71,6 +71,8 @@ Support for Dark Theme is available. However, there is a small bug for Android 1
 <img src="art/details-dark.png" width="25%">
 </p>
 
+## Art
+I made a humble attempt to create the app icon by myself 💩 using [InkScape](https://inkscape.org/) a free and open source vector graphics editor available across MacOS, Windows and Linux.
 
 ## License
 ```
