@@ -146,7 +146,7 @@ class RecipeListingViewModelTest {
             viewModel =
                 RecipeListingViewModel(recipeRepository, connectivityDetector, dispatcherProvider)
 
-            // then - offline message is shown
+            // then - error message is shown
             val recipeListToDisplay = getValue(viewModel.allRecipes)
             val showLoading = getValue(viewModel.showLoading)
             val showError = getValue(viewModel.showError)
@@ -168,7 +168,7 @@ class RecipeListingViewModelTest {
             viewModel =
                 RecipeListingViewModel(recipeRepository, connectivityDetector, dispatcherProvider)
 
-            // then - offline message is shown
+            // then - error message is shown
             val recipeListToDisplay = getValue(viewModel.allRecipes)
             val showLoading = getValue(viewModel.showLoading)
             val showError = getValue(viewModel.showError)
@@ -194,7 +194,8 @@ class RecipeListingViewModelTest {
                 )
 
             coEvery { recipeRepository.getAllRecipes() } returns MutableLiveData(ArrayList())
-            // then - offline message is shown
+
+            // then - error message is not shown
             val recipeListToDisplay = getValue(viewModel.allRecipes)
             val showLoading = getValue(viewModel.showLoading)
             val showError = getValue(viewModel.showError)
