@@ -46,6 +46,7 @@ import dev.pinaki.desipe.feature.detail.heading.recipe.RecipeHeadingAdapter
 import dev.pinaki.desipe.feature.detail.heading.section.HeadingAdapter
 import dev.pinaki.desipe.feature.detail.ingredients.IngredientsAdapter
 import dev.pinaki.desipe.feature.detail.steps.RecipeStepsAdapter
+import dev.pinaki.desipe.helper.util.getAbsoluteUrl
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailFragment : BaseFragment<DetailsFragmentBinding>() {
@@ -78,7 +79,7 @@ class DetailFragment : BaseFragment<DetailsFragmentBinding>() {
         context?.run {
             val imageLoader = ImageLoader(this)
             val request = LoadRequest.Builder(this)
-                .data(imageUrl)
+                .data(getAbsoluteUrl(imageUrl))
                 .target(onError = {
                     startPostponedEnterTransition()
                 }, onSuccess = {
