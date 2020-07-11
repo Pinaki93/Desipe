@@ -44,7 +44,7 @@ import dev.pinaki.desipe.data.source.local.sharedprefs.SharedPreferencesManager
 import dev.pinaki.desipe.data.source.local.sharedprefs.SharedPreferencesManagerImpl
 import dev.pinaki.desipe.data.source.remote.RecipeApiService
 import dev.pinaki.desipe.feature.theme.DarkThemeModeChooserViewModel
-import dev.pinaki.desipe.feature.detail.DetailsViewModel
+import dev.pinaki.desipe.feature.detail.RecipeDetailsViewModel
 import dev.pinaki.desipe.feature.listing.RecipeListingViewModel
 import dev.pinaki.desipe.helper.moshi.DesipeMoshiHelper
 import okhttp3.Interceptor
@@ -137,7 +137,7 @@ private val viewModelModule = module {
         RecipeListingViewModel(get(), get(), get())
     }
 
-    viewModel { DetailsViewModel(get()) }
+    viewModel { RecipeDetailsViewModel(get()) }
 
     viewModel {
         DarkThemeModeChooserViewModel(get(), get(), get(named(InjectionConstants.KEY_OS_VERSION)))

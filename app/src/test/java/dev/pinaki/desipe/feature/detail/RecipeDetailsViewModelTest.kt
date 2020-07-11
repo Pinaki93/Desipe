@@ -25,23 +25,42 @@
 
 package dev.pinaki.desipe.feature.detail
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import dev.pinaki.desipe.fake.FakeRecipeRepository
+import dev.pinaki.desipe.getSampleData
+import dev.pinaki.desipe.testutil.MainCoroutineRule
+import dev.pinaki.desipe.testutil.getValue
 import io.mockk.MockKAnnotations
-import io.mockk.impl.annotations.MockK
-import org.junit.After
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
 
-import org.junit.Assert.*
+import org.junit.Rule
 import org.junit.Test
 
 /**
- * Unit Tests for [DetailsViewModel]
- *
- *
+ * Unit Tests for [RecipeDetailsViewModel]
+ * - when viewmodel is asked to load data with id, proper data is loaded
  */
-class DetailsViewModelTest {
+@ExperimentalCoroutinesApi
+class RecipeDetailsViewModelTest {
 
-    lateinit var viewModel: DetailsViewModel
+    lateinit var viewModelRecipe: RecipeDetailsViewModel
+
+    @get:Rule
+    val mainCoroutineRule = MainCoroutineRule()
+
+    @get:Rule
+    val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Before
     fun setUp() = MockKAnnotations.init(this, relaxUnitFun = true)
+
+    @Test
+    fun testLoad() {
+        viewModelRecipe = RecipeDetailsViewModel(FakeRecipeRepository(getSampleData()))
+        viewModelRecipe.load(1)
+
+        val recipeLoaded = getValue(viewModelRecipe.recipe)
+        assert(recipeLoaded.id == 1)
+    }
 }

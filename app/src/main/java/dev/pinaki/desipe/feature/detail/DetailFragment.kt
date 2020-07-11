@@ -50,7 +50,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailFragment : BaseFragment<DetailsFragmentBinding>() {
 
-    private val detailsViewModel: DetailsViewModel by viewModel()
+    private val recipeDetailsViewModel: RecipeDetailsViewModel by viewModel()
     private val detailFragmentArgs: DetailFragmentArgs by navArgs()
 
     private val recipeHeadingAdapter = RecipeHeadingAdapter()
@@ -126,11 +126,11 @@ class DetailFragment : BaseFragment<DetailsFragmentBinding>() {
     }
 
     override fun loadData() {
-        detailsViewModel.load(detailFragmentArgs.recipeId)
+        recipeDetailsViewModel.load(detailFragmentArgs.recipeId)
     }
 
     override fun observeDataAndActions() {
-        detailsViewModel.recipe.observe(this, Observer { showDetails(it) })
+        recipeDetailsViewModel.recipe.observe(this, Observer { showDetails(it) })
     }
 
     private fun showDetails(recipe: Recipe) {
