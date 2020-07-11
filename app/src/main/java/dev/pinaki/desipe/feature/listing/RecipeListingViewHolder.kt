@@ -36,6 +36,7 @@ import dev.pinaki.desipe.common.util.getRecipeDetailsText
 import dev.pinaki.desipe.common.util.px
 import dev.pinaki.desipe.data.model.Recipe
 import dev.pinaki.desipe.databinding.RecipeItemBinding
+import dev.pinaki.desipe.helper.util.loadRelativeUrl
 
 class RecipeListingViewHolder private constructor(
     private val binding: RecipeItemBinding
@@ -55,7 +56,7 @@ class RecipeListingViewHolder private constructor(
             val imageUrl = recipe.image
             imageViewRecipe.transitionName = imageUrl
 
-            imageViewRecipe.load(imageUrl) {
+            imageViewRecipe.loadRelativeUrl(imageUrl) {
                 crossfade(true)
                 placeholder(R.drawable.listing_img_placeholder)
                 transformations(RoundedCornersTransformation(4f.px))
