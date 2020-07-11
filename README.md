@@ -55,11 +55,15 @@ Support for Dark Theme is available. However, there is a small bug for Android 1
 
 ## Screenshots 📷
 <h4>Light Theme:</h4>
-<img src="art/listing-light.png" height="500">
-<img src="art/details-top-light.png" height="500">
+<p float="left">
+<img src="art/listing-light.png" width="30%">
+<img src="art/details-top-light.png" width="30%">
+</p>
 <h4>Dark Theme:</h4>
-<img src="art/listing-dark.png" height="500">
-<img src="art/details-dark.png" height="500">
+<p>
+<img src="art/listing-dark.png" width="30%">
+<img src="art/details-dark.png" width="30%">
+</p>
 
 
 ## License
