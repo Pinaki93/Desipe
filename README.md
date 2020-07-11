@@ -55,7 +55,7 @@ Support for Dark Theme is available. However, there is a small bug for Android 1
 
 ## TODO 🔨
 🛠️ Set Up CI using either Github Workflow or CircleCI\
-🛠️ Add lint support
+🛠️ Add lint support\
 🛠️ Write UI tests and increase test coverage.
 
 
