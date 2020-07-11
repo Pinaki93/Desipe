@@ -23,20 +23,25 @@
  *
  */
 
-package dev.pinaki.desipe
+package dev.pinaki.desipe.feature.detail
 
-import org.junit.Test
+import io.mockk.MockKAnnotations
+import io.mockk.impl.annotations.MockK
+import org.junit.After
+import org.junit.Before
 
 import org.junit.Assert.*
+import org.junit.Test
 
 /**
- * Example local unit test, which will execute on the development machine (host).
+ * Unit Tests for [DetailsViewModel]
  *
- * See [testing documentation](http://d.android.com/tools/testing).
+ *
  */
-class ExampleUnitTest {
-    @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
-    }
+class DetailsViewModelTest {
+
+    lateinit var viewModel: DetailsViewModel
+
+    @Before
+    fun setUp() = MockKAnnotations.init(this, relaxUnitFun = true)
 }

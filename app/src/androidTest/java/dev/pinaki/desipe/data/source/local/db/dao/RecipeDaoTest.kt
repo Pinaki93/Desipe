@@ -32,7 +32,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import dev.pinaki.desipe.data.source.local.db.DesipeDatabase
 import dev.pinaki.desipe.getSampleData
-import dev.pinaki.desipe.util.getValue
+import dev.pinaki.desipe.testutil.getValue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.CoreMatchers.`is`

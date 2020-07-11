@@ -67,9 +67,13 @@ class RecipeListingViewModel(
         viewModelScope.launch(dispatcherProvider.io()) {
             try {
                 val recipesFromServer = recipeRepository.syncRecipes()
-                recipeRepository.deleteAllRecipes()
-                recipeRepository.saveAllRecipes(recipesFromServer)
-                _showError.postValue(false)
+                val success = recipesFromServer.isNotEmpty()
+                if (success) {
+                    recipeRepository.deleteAllRecipes()
+                    recipeRepository.saveAllRecipes(recipesFromServer)
+                }
+
+                _showError.postValue(!success)
             } catch (e: Exception) {
                 Timber.tag(TAG).e(e)
                 _showError.postValue(true)
