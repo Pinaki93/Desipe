@@ -16,34 +16,42 @@ The release APK can be downloaded from [here](https://github.com/Pinaki93/Desipe
 ## Architecture 🏗️
 I've used Google [recommended app architecture](https://developer.android.com/jetpack/guide) following `Model-View-ViewModel` (MVVM) architecture, exposing `PresentationModel` out from the `ViewModel` wrapped in `LiveData` to updated the UI in a lifecycle aware manner. 
 
-## Libraries Used
-UI:
-🚀 [AndroidX libraries (Core/AppCompat/ConstraintLayout/RecyclerView)](https://android.googlesource.com/platform/frameworks/support/+/androidx-master-dev)
-🚀 [Material Design](https://material.io/develop/android)
+## Libraries Used 📚
+UI:\
+🚀 [AndroidX libraries (Core/AppCompat/ConstraintLayout/RecyclerView)](https://android.googlesource.com/platform/frameworks/support/+/androidx-master-dev)\
+🚀 [Material Design](https://material.io/develop/android)\
+\
+Transitions:\
+🚀 [Jetpack Navigation](https://developer.android.com/guide/navigation/)\
+\
+Threading:\
+🚀 [Kotlin Coroutine](https://github.com/Kotlin/kotlinx.coroutines)\
 
-Transitions:
-🚀 [Jetpack Navigation](https://developer.android.com/guide/navigation/)
+Service Locator:\
+🚀 [Koin](https://github.com/InsertKoinIO/koin)\
+\
+SQLite:\
+🚀 [Room Database](https://developer.android.com/topic/libraries/architecture/room?gclid=Cj0KCQjwo6D4BRDgARIsAA6uN187m5Vp-GP0Vg9HLx4JpN3CHfDGedLVNVTF0uxZd4d6N2gzAxVLfVkaAuqxEALw_wcB&gclsrc=aw.ds)\
+\
+Image loading/animations:\
+🚀 [Coil-Kt](https://github.com/coil-kt/coil)\
+🚀 [Lottie](https://github.com/airbnb/lottie-android)\
+\
+HTTP Operations:\
+🚀 [Retrofit](https://github.com/square/retrofit)\
+🚀 [Okhttp](https://github.com/square/okhttp)\
+\
+JSON serialization/deserialization:\
+🚀 [Moshi](https://github.com/square/moshi)\
+\
+Mocking/Spying test objects:\
+🚀 [Mockk](https://mockk.io/)
 
-Threading:
-🚀 [Kotlin Coroutine](https://github.com/Kotlin/kotlinx.coroutines)
+## Data 💾
+Data is a dummy set of JSON and images hosted on a github page. Most of the content is still dummy. Please feel free to clone [this repo](https://github.com/Pinaki93/json-data) and add/modify content under the `recipes` folder.
 
-Service Locator:
-🚀 [Koin](https://github.com/InsertKoinIO/koin)
-
-SQLite:
-🚀 [Room Database](https://developer.android.com/topic/libraries/architecture/room?gclid=Cj0KCQjwo6D4BRDgARIsAA6uN187m5Vp-GP0Vg9HLx4JpN3CHfDGedLVNVTF0uxZd4d6N2gzAxVLfVkaAuqxEALw_wcB&gclsrc=aw.ds)
-
-
-Image loading/animations:
-🚀 [Coil-Kt](https://github.com/coil-kt/coil)
-🚀 [Lottie](https://github.com/airbnb/lottie-android)
-
-HTTP Operations:
-🚀 [Retrofit](https://github.com/square/retrofit)
-🚀 [Okhttp](https://github.com/square/okhttp)
-
-JSON serialization/deserialization:
-🚀 [Moshi](https://github.com/square/moshi)
+# Dark Theme 🌙
+Support for Dark Theme is available. However, there is a small bug for Android 10 and above that the theme doesn't get updated when user selects **Follow System** from the bottom sheet. Upon killing the app once and returning back, the theme gets updated.
 
 ## License
 ```
