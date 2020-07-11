@@ -50,19 +50,25 @@ Mocking/Spying test objects:\
 ## Data ☁️
 Data is a dummy set of JSON and images hosted on a github page. Most of the content is still dummy. Please feel free to clone [this repo](https://github.com/Pinaki93/json-data) and add/modify content under the `recipes` folder.
 
-# Dark Theme 🌙
+## Dark Theme 🌙
 Support for Dark Theme is available. However, there is a small bug for Android 10 and above that the theme doesn't get updated when user selects **Follow System** from the bottom sheet. Upon killing the app once and returning back, the theme gets updated.
+
+## TODO 🔨
+🛠️ Set Up CI using either Github Workflow or CircleCI\
+🛠️ Add lint support
+🛠️ Write UI tests and increase test coverage.
+
 
 ## Screenshots 📷
 <h4>Light Theme:</h4>
 <p float="left">
-<img src="art/listing-light.png" width="30%">
-<img src="art/details-top-light.png" width="30%">
+<img src="art/listing-light.png" width="25%">
+<img src="art/details-top-light.png" width="25%">
 </p>
 <h4>Dark Theme:</h4>
 <p>
-<img src="art/listing-dark.png" width="30%">
-<img src="art/details-dark.png" width="30%">
+<img src="art/listing-dark.png" width="25%">
+<img src="art/details-dark.png" width="25%">
 </p>
 
 
