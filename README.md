@@ -7,8 +7,15 @@
   <a href="https://badges.frapsoft.com/os/v2/open-source.svg?v=103"><img src="https://badges.frapsoft.com/os/v2/open-source.svg?v=103"></a>
 </p>
 
-# Desipe
+# Desipe 🥘
 Desipe is an Indian Recipe App 🍜 that I created to demonstrate some of the commonly used libraries in Android development.
+
+## Download 📥
+The release APK can be downloaded from [here](https://github.com/Pinaki93/Desipe/tree/master/apk).
+
+## Architecture 🏗️
+I've used Google [recommended app architecture](https://developer.android.com/jetpack/guide) following `Model-View-ViewModel` (MVVM) architecture, exposing `PresentationModel`s out from the `ViewModel`s wrapped in `LiveData`s to guide the UI in a lifecycle aware manner. 
+
 ## License
 ```
 MIT License
