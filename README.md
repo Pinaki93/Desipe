@@ -8,13 +8,42 @@
 </p>
 
 # Desipe 🥘
-Desipe is an Indian Recipe App 🍜 that I created to demonstrate some of the commonly used libraries in Android development.
+Desipe is a simple app listing a few Indian recipes, created to demonstrate some of the commonly used libraries in Android development.
 
 ## Download 📥
 The release APK can be downloaded from [here](https://github.com/Pinaki93/Desipe/tree/master/apk).
 
 ## Architecture 🏗️
-I've used Google [recommended app architecture](https://developer.android.com/jetpack/guide) following `Model-View-ViewModel` (MVVM) architecture, exposing `PresentationModel`s out from the `ViewModel`s wrapped in `LiveData`s to guide the UI in a lifecycle aware manner. 
+I've used Google [recommended app architecture](https://developer.android.com/jetpack/guide) following `Model-View-ViewModel` (MVVM) architecture, exposing `PresentationModel` out from the `ViewModel` wrapped in `LiveData` to updated the UI in a lifecycle aware manner. 
+
+## Libraries Used
+UI:
+🚀 [AndroidX libraries (Core/AppCompat/ConstraintLayout/RecyclerView)](https://android.googlesource.com/platform/frameworks/support/+/androidx-master-dev)
+🚀 [Material Design](https://material.io/develop/android)
+
+Transitions:
+🚀 [Jetpack Navigation](https://developer.android.com/guide/navigation/)
+
+Threading:
+🚀 [Kotlin Coroutine](https://github.com/Kotlin/kotlinx.coroutines)
+
+Service Locator:
+🚀 [Koin](https://github.com/InsertKoinIO/koin)
+
+SQLite:
+🚀 [Room Database](https://developer.android.com/topic/libraries/architecture/room?gclid=Cj0KCQjwo6D4BRDgARIsAA6uN187m5Vp-GP0Vg9HLx4JpN3CHfDGedLVNVTF0uxZd4d6N2gzAxVLfVkaAuqxEALw_wcB&gclsrc=aw.ds)
+
+
+Image loading/animations:
+🚀 [Coil-Kt](https://github.com/coil-kt/coil)
+🚀 [Lottie](https://github.com/airbnb/lottie-android)
+
+HTTP Operations:
+🚀 [Retrofit](https://github.com/square/retrofit)
+🚀 [Okhttp](https://github.com/square/okhttp)
+
+JSON serialization/deserialization:
+🚀 [Moshi](https://github.com/square/moshi)
 
 ## License
 ```
