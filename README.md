@@ -47,11 +47,18 @@ JSON serialization/deserialization:\
 Mocking/Spying test objects:\
 🚀 [Mockk](https://mockk.io/)
 
-## Data 💾
+## Data ☁️
 Data is a dummy set of JSON and images hosted on a github page. Most of the content is still dummy. Please feel free to clone [this repo](https://github.com/Pinaki93/json-data) and add/modify content under the `recipes` folder.
 
 # Dark Theme 🌙
 Support for Dark Theme is available. However, there is a small bug for Android 10 and above that the theme doesn't get updated when user selects **Follow System** from the bottom sheet. Upon killing the app once and returning back, the theme gets updated.
+
+## Screenshots 📷
+<img src="art/listing-light.png" height="500">
+<img src="art/listing-dark.png" height="500">
+<img src="art/details-light.png" height="500">
+<img src="art/detailstop--dark.png" height="500">
+
 
 ## License
 ```
