@@ -62,7 +62,7 @@ fun getSampleData(): List<Recipe> {
                 1,
                 "Desi Lamb Tikka Burger",
                 "A burger containing a juicy fat patty made of lamb served with tomatoes and lettue",
-                "https://res.cloudinary.com/pinaki93/image/upload/v1593900066/food-1081707_640_ezrubj.jpg",
+                "img/burger.jpg",
                 ArrayList<Ingredient>().apply {
                     add(Ingredient("Bun", 2, "Units"))
                     add(Ingredient("Lettuce", 4, "leaves"))
@@ -90,7 +90,7 @@ fun getSampleData(): List<Recipe> {
                 2,
                 "Chicken Dum Biriyani",
                 "A delicacy prepared in different parts of India with tender chicken pieces and aromatic long grain rice",
-                "https://res.cloudinary.com/pinaki93/image/upload/v1593900068/biryani-1141444_640_przhfd.jpg",
+                "img/biriyani.jpg",
                 ArrayList<Ingredient>().apply {
                     add(Ingredient("Rice", 500, "gms"))
                     add(Ingredient("Oil", 4, "tsp"))
@@ -120,7 +120,7 @@ fun getSampleData(): List<Recipe> {
                 3,
                 "Bhel",
                 "An evening snack popular all across India, knows by many different regional names",
-                "https://res.cloudinary.com/pinaki93/image/upload/v1593900066/jhal-muri-827292_640_btx94u.jpg",
+                "img/bhel.jpg",
                 getIngredients(),
                 getSteps()
             )
@@ -131,7 +131,7 @@ fun getSampleData(): List<Recipe> {
                 4,
                 "Rasgulla",
                 "An east Indian delicacy with a controversial origin but that doesn't stop anyone from loving it!",
-                "https://res.cloudinary.com/pinaki93/image/upload/v1593900066/sweets-577230_640_cekunj.jpg",
+                "img/rasgulla.jpg",
                 getIngredients(),
                 getSteps()
             )
@@ -142,7 +142,7 @@ fun getSampleData(): List<Recipe> {
                 5,
                 "Omlette",
                 "A quick to prepare meal for any time of the day, savoured all over the world",
-                "https://res.cloudinary.com/pinaki93/image/upload/v1593900066/food-4046229_640_ub6i4e.jpg",
+                "img/omlette.jpg",
                 getIngredients(),
                 getSteps()
             )
@@ -153,7 +153,7 @@ fun getSampleData(): List<Recipe> {
                 6,
                 "Plain Dosa",
                 "Choice of drug for sober people all across India hailing from the South.",
-                "https://res.cloudinary.com/pinaki93/image/upload/v1593900067/indian-1768906_640_j6olcu.jpg",
+                "img/dosa.jpg",
                 getIngredients(),
                 getSteps()
             )
@@ -164,7 +164,7 @@ fun getSampleData(): List<Recipe> {
                 7,
                 "Khaman",
                 "A savoury steamed dish from Gujarat that can make it's way to any meal you can ever have.",
-                "https://res.cloudinary.com/pinaki93/image/upload/v1593900067/indian-1969797_640_qaibyr.jpg",
+                "img/khaman.jpg",
                 getIngredients(),
                 getSteps()
             )
@@ -175,7 +175,7 @@ fun getSampleData(): List<Recipe> {
                 8,
                 "Samosa",
                 "Crunchy on the outside, hot and soft on the inside. If Samosa is a question, yes is the answer",
-                "https://res.cloudinary.com/pinaki93/image/upload/v1593900067/food-143622_640_zlg7yv.jpg",
+                "img/samosa.jpg",
                 getIngredients(),
                 getSteps()
             )
