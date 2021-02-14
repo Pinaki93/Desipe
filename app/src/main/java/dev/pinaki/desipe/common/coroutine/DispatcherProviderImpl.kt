@@ -26,8 +26,9 @@
 package dev.pinaki.desipe.common.coroutine
 
 import kotlinx.coroutines.Dispatchers
+import javax.inject.Inject
 
-class DispatcherProviderImpl : DispatcherProvider {
+class DispatcherProviderImpl @Inject constructor() : DispatcherProvider {
     override fun io() = Dispatchers.IO
 
     override fun main() = Dispatchers.Main

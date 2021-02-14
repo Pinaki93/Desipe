@@ -30,12 +30,16 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import androidx.annotation.RequiresApi
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
 /**
  * Class to check whether the device is currently connected to the internet or not
  * Reference: https://medium.com/@elye.project/android-intercept-on-no-internet-connection-acb91d305357
  */
-class ConnectivityDetectorImpl(val context: Context) : ConnectivityDetector {
+class ConnectivityDetectorImpl @Inject constructor(
+    @ApplicationContext val context: Context
+) : ConnectivityDetector {
 
     override fun isConnected(): Boolean {
         val connectivityManager =

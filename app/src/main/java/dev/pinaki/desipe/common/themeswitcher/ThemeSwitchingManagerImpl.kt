@@ -28,10 +28,10 @@ package dev.pinaki.desipe.common.themeswitcher
 import androidx.appcompat.app.AppCompatDelegate
 import dev.pinaki.desipe.common.ds.DarkThemeMode
 import dev.pinaki.desipe.data.repository.ThemeRepository
+import javax.inject.Inject
 
-@Suppress("MemberVisibilityCanBePrivate")
-class ThemeSwitchingManagerImpl constructor(
-    val themeRepository: ThemeRepository
+class ThemeSwitchingManagerImpl @Inject constructor(
+    private val themeRepository: ThemeRepository
 ) : ThemeSwitchingManager {
 
     override fun apply() {

@@ -26,13 +26,16 @@
 package dev.pinaki.desipe.feature.listing
 
 import androidx.lifecycle.*
+import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.pinaki.desipe.common.connectivity.ConnectivityDetector
 import dev.pinaki.desipe.common.coroutine.DispatcherProvider
 import dev.pinaki.desipe.data.repository.RecipeRepository
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import javax.inject.Inject
 
-class RecipeListingViewModel(
+@HiltViewModel
+class RecipeListingViewModel @Inject constructor(
     private val recipeRepository: RecipeRepository,
     private val connectivityDetector: ConnectivityDetector,
     private val dispatcherProvider: DispatcherProvider

@@ -23,31 +23,38 @@
  *
  */
 
-package dev.pinaki.desipe.data.repository.impl
+package dev.pinaki.desipe.di.module
 
-import dev.pinaki.desipe.common.ds.DarkThemeMode
-import dev.pinaki.desipe.data.repository.ThemeRepository
-import dev.pinaki.desipe.data.source.local.sharedprefs.SharedPreferencesManager
-import javax.inject.Inject
+import android.os.Build
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import dev.pinaki.desipe.BuildConfig
+import dev.pinaki.desipe.di.InjectionConstants
+import javax.inject.Named
 
-class ThemeRepositoryImpl @Inject constructor(
-    private val sharedPreferencesManager: SharedPreferencesManager
-) : ThemeRepository {
+@Module
+@InstallIn(SingletonComponent::class)
+object ConfigModule {
 
-    override fun getCurrentDarkThemeMode(): DarkThemeMode? {
-        return DarkThemeMode.fromString(
-            sharedPreferencesManager.getString(
-                KEY_CURRENT_THEME,
-                DarkThemeMode.SYSTEM.name
-            )
-        )
-    }
+    @Provides
+    @Named(InjectionConstants.KEY_DATABASE_NAME)
+    fun providesDatabaseName() = BuildConfig.DATABASE_NAME
 
-    override fun setCurrentDarkThemeMode(theme: DarkThemeMode) {
-        sharedPreferencesManager.putString(KEY_CURRENT_THEME, theme.name)
-    }
+    @Provides
+    @Named(InjectionConstants.KEY_IS_DEBUG_BUILD)
+    fun providesIsDebugBuild() = BuildConfig.DEBUG
 
-    companion object {
-        const val KEY_CURRENT_THEME = "current_theme"
-    }
+    @Provides
+    @Named(InjectionConstants.KEY_BASE_URL)
+    fun providesBaseUrl() = BuildConfig.SERVER_URL
+
+    @Provides
+    @Named(InjectionConstants.KEY_PREFERENCES_NAME)
+    fun providesSharedPrefName() = BuildConfig.SHARED_PREFS_NAME
+
+    @Provides
+    @Named(InjectionConstants.KEY_OS_VERSION)
+    fun providesOSVersion() = Build.VERSION.SDK_INT
 }

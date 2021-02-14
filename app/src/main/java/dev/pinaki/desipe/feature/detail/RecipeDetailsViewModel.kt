@@ -27,10 +27,15 @@ package dev.pinaki.desipe.feature.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.pinaki.desipe.data.model.Recipe
 import dev.pinaki.desipe.data.repository.RecipeRepository
+import javax.inject.Inject
 
-class RecipeDetailsViewModel(private val recipeRepository: RecipeRepository) : ViewModel() {
+@HiltViewModel
+class RecipeDetailsViewModel @Inject constructor(
+    private val recipeRepository: RecipeRepository
+) : ViewModel() {
 
     lateinit var recipe: LiveData<Recipe>
 

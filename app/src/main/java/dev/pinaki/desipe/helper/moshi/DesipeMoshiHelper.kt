@@ -26,14 +26,23 @@
 package dev.pinaki.desipe.helper.moshi
 
 import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
+import dagger.hilt.EntryPoints
+import dev.pinaki.desipe.DesipeApp
 import dev.pinaki.desipe.common.util.MoshiHelper
 import dev.pinaki.desipe.data.model.Ingredient
 import dev.pinaki.desipe.data.model.Recipe
+import dev.pinaki.desipe.di.entrypoint.MoshiHelperEntryPoint
 
 object DesipeMoshiHelper : MoshiHelper() {
+
+    override val moshi: Moshi =
+        EntryPoints.get(DesipeApp.desipeApplicationContext, MoshiHelperEntryPoint::class.java)
+            .getMoshi()
+
     val ingredientsListAdapter: JsonAdapter<List<Ingredient>> = listAdapter()
 
     val stringListAdapter: JsonAdapter<List<String>> = listAdapter()
 
-    val recipeListAdapter : JsonAdapter<List<Recipe>> = listAdapter()
+    val recipeListAdapter: JsonAdapter<List<Recipe>> = listAdapter()
 }

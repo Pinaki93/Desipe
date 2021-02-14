@@ -28,6 +28,7 @@ package dev.pinaki.desipe.feature.detail
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -38,6 +39,7 @@ import androidx.transition.TransitionInflater
 import coil.ImageLoader
 import coil.api.load
 import coil.request.LoadRequest
+import dagger.hilt.android.AndroidEntryPoint
 import dev.pinaki.desipe.R
 import dev.pinaki.desipe.common.base.BaseFragment
 import dev.pinaki.desipe.data.model.Recipe
@@ -47,11 +49,11 @@ import dev.pinaki.desipe.feature.detail.heading.section.HeadingAdapter
 import dev.pinaki.desipe.feature.detail.ingredients.IngredientsAdapter
 import dev.pinaki.desipe.feature.detail.steps.RecipeStepsAdapter
 import dev.pinaki.desipe.helper.util.getAbsoluteUrl
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
+@AndroidEntryPoint
 class DetailFragment : BaseFragment<DetailsFragmentBinding>() {
 
-    private val recipeDetailsViewModel: RecipeDetailsViewModel by viewModel()
+    private val recipeDetailsViewModel: RecipeDetailsViewModel by viewModels()
     private val detailFragmentArgs: DetailFragmentArgs by navArgs()
 
     private val recipeHeadingAdapter = RecipeHeadingAdapter()
