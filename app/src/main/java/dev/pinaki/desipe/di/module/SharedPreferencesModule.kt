@@ -23,31 +23,24 @@
  *
  */
 
-package dev.pinaki.desipe.data.repository.impl
+package dev.pinaki.desipe.di.module
 
-import dev.pinaki.desipe.common.ds.DarkThemeMode
-import dev.pinaki.desipe.data.repository.ThemeRepository
+import dagger.Binds
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import dev.pinaki.desipe.data.source.local.sharedprefs.SharedPreferencesManager
-import javax.inject.Inject
+import dev.pinaki.desipe.data.source.local.sharedprefs.SharedPreferencesManagerImpl
+import javax.inject.Singleton
 
-class ThemeRepositoryImpl @Inject constructor(
-    private val sharedPreferencesManager: SharedPreferencesManager
-) : ThemeRepository {
 
-    override fun getCurrentDarkThemeMode(): DarkThemeMode? {
-        return DarkThemeMode.fromString(
-            sharedPreferencesManager.getString(
-                KEY_CURRENT_THEME,
-                DarkThemeMode.SYSTEM.name
-            )
-        )
-    }
+@Module
+@InstallIn(SingletonComponent::class)
+interface SharedPreferencesModule {
 
-    override fun setCurrentDarkThemeMode(theme: DarkThemeMode) {
-        sharedPreferencesManager.putString(KEY_CURRENT_THEME, theme.name)
-    }
-
-    companion object {
-        const val KEY_CURRENT_THEME = "current_theme"
-    }
+    @Binds
+    @Singleton
+    fun bindsSharedPreferencesManager(
+        sharedPreferencesManager: SharedPreferencesManagerImpl
+    ): SharedPreferencesManager
 }

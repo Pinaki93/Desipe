@@ -23,31 +23,15 @@
  *
  */
 
-package dev.pinaki.desipe.data.repository.impl
+package dev.pinaki.desipe.di.entrypoint
 
-import dev.pinaki.desipe.common.ds.DarkThemeMode
-import dev.pinaki.desipe.data.repository.ThemeRepository
-import dev.pinaki.desipe.data.source.local.sharedprefs.SharedPreferencesManager
-import javax.inject.Inject
+import com.squareup.moshi.Moshi
+import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 
-class ThemeRepositoryImpl @Inject constructor(
-    private val sharedPreferencesManager: SharedPreferencesManager
-) : ThemeRepository {
-
-    override fun getCurrentDarkThemeMode(): DarkThemeMode? {
-        return DarkThemeMode.fromString(
-            sharedPreferencesManager.getString(
-                KEY_CURRENT_THEME,
-                DarkThemeMode.SYSTEM.name
-            )
-        )
-    }
-
-    override fun setCurrentDarkThemeMode(theme: DarkThemeMode) {
-        sharedPreferencesManager.putString(KEY_CURRENT_THEME, theme.name)
-    }
-
-    companion object {
-        const val KEY_CURRENT_THEME = "current_theme"
-    }
+@EntryPoint
+@InstallIn(SingletonComponent::class)
+interface MoshiHelperEntryPoint {
+    fun getMoshi(): Moshi
 }

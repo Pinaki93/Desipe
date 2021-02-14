@@ -23,31 +23,35 @@
  *
  */
 
-package dev.pinaki.desipe.data.repository.impl
+package dev.pinaki.desipe.di.module
 
-import dev.pinaki.desipe.common.ds.DarkThemeMode
-import dev.pinaki.desipe.data.repository.ThemeRepository
-import dev.pinaki.desipe.data.source.local.sharedprefs.SharedPreferencesManager
-import javax.inject.Inject
+import android.content.Context
+import androidx.room.Room
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
+import dev.pinaki.desipe.data.source.local.db.DesipeDatabase
+import dev.pinaki.desipe.di.InjectionConstants
+import javax.inject.Named
+import javax.inject.Singleton
 
-class ThemeRepositoryImpl @Inject constructor(
-    private val sharedPreferencesManager: SharedPreferencesManager
-) : ThemeRepository {
+@Module
+@InstallIn(SingletonComponent::class)
+object DatabaseModule {
 
-    override fun getCurrentDarkThemeMode(): DarkThemeMode? {
-        return DarkThemeMode.fromString(
-            sharedPreferencesManager.getString(
-                KEY_CURRENT_THEME,
-                DarkThemeMode.SYSTEM.name
-            )
-        )
-    }
+    @Provides
+    @Singleton
+    fun providesDesipeDatabase(
+        @ApplicationContext context: Context,
+        @Named(InjectionConstants.KEY_DATABASE_NAME) databaseName: String
+    ) = Room.databaseBuilder(
+        context,
+        DesipeDatabase::class.java,
+        databaseName
+    ).build()
 
-    override fun setCurrentDarkThemeMode(theme: DarkThemeMode) {
-        sharedPreferencesManager.putString(KEY_CURRENT_THEME, theme.name)
-    }
-
-    companion object {
-        const val KEY_CURRENT_THEME = "current_theme"
-    }
+    @Provides
+    fun providesRecipeDao(desipeDatabase: DesipeDatabase) = desipeDatabase.recipeDao()
 }

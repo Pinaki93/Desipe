@@ -2,17 +2,19 @@ package dev.pinaki.desipe.feature.theme
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
 import dev.pinaki.desipe.common.base.BaseBottomSheetDialogFragment
 import dev.pinaki.desipe.databinding.ThemeChooserBottomSheetBinding
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
+@AndroidEntryPoint
 class DarkThemeModeChooserBottomSheetDialogFragment :
     BaseBottomSheetDialogFragment<ThemeChooserBottomSheetBinding>() {
 
-    private val viewModel: DarkThemeModeChooserViewModel by viewModel()
+    private val viewModel: DarkThemeModeChooserViewModel by viewModels()
 
     private lateinit var adapter: DarkThemeModeChooserAdapter
 

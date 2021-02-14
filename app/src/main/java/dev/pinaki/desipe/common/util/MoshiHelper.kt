@@ -33,9 +33,9 @@ import java.lang.reflect.Type
 /**
  * Base class to create json adapters for Moshi.
  */
-open class MoshiHelper {
+abstract class MoshiHelper {
 
-    val moshi: Moshi = Moshi.Builder().build()
+    abstract val moshi: Moshi
 
     protected inline fun <reified T> adapter(): JsonAdapter<T> = moshi.adapter(T::class.java)
 

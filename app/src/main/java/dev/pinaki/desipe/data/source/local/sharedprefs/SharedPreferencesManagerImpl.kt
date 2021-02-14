@@ -27,15 +27,19 @@ package dev.pinaki.desipe.data.source.local.sharedprefs
 
 import android.content.Context
 import android.content.SharedPreferences
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dev.pinaki.desipe.di.InjectionConstants
+import javax.inject.Inject
+import javax.inject.Named
 
-class SharedPreferencesManagerImpl(
-    application: Context,
-    name: String?
+class SharedPreferencesManagerImpl @Inject constructor(
+    @ApplicationContext context: Context,
+    @Named(InjectionConstants.KEY_PREFERENCES_NAME) name: String?
 ) : SharedPreferencesManager {
     private var prefs: SharedPreferences? = null
 
     init {
-        prefs = application.getSharedPreferences(name, Context.MODE_PRIVATE)
+        prefs = context.getSharedPreferences(name, Context.MODE_PRIVATE)
     }
 
     override fun clearPrefs() {
