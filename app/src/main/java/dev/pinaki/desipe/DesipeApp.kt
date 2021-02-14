@@ -26,28 +26,28 @@
 package dev.pinaki.desipe
 
 import android.app.Application
+import android.content.Context
+import dagger.hilt.android.HiltAndroidApp
 import dev.pinaki.desipe.common.themeswitcher.ThemeSwitchingManager
 import dev.pinaki.desipe.common.timber.ProductionTimberTree
-import dev.pinaki.desipe.di.desipeAppModules
-import org.koin.android.ext.android.inject
-import org.koin.android.ext.koin.androidContext
-import org.koin.core.context.startKoin
 import timber.log.Timber
+import javax.inject.Inject
 
+@HiltAndroidApp
 class DesipeApp : Application() {
 
-    private val themeSwitchingManager: ThemeSwitchingManager by inject()
+    @Inject
+    lateinit var themeSwitchingManager: ThemeSwitchingManager
 
     override fun onCreate() {
         super.onCreate()
-
+        desipeApplicationContext = this
         Timber.plant(if (BuildConfig.DEBUG) Timber.DebugTree() else ProductionTimberTree())
-
-        startKoin {
-            androidContext(this@DesipeApp)
-            modules(*desipeAppModules)
-        }
-
         themeSwitchingManager.apply()
+    }
+
+    companion object {
+        @JvmStatic
+        lateinit var desipeApplicationContext: Context
     }
 }

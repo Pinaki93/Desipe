@@ -30,8 +30,9 @@ import dev.pinaki.desipe.data.model.Recipe
 import dev.pinaki.desipe.data.repository.RecipeRepository
 import dev.pinaki.desipe.data.source.local.db.dao.RecipeDao
 import dev.pinaki.desipe.data.source.remote.RecipeApiService
+import javax.inject.Inject
 
-class RecipeRepositoryImpl(
+class RecipeRepositoryImpl @Inject constructor(
     private val recipeApiService: RecipeApiService,
     private val recipeDao: RecipeDao
 ) : RecipeRepository {

@@ -29,22 +29,24 @@ import android.view.*
 import android.widget.ImageView
 import androidx.annotation.RawRes
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
 import dev.pinaki.desipe.R
 import dev.pinaki.desipe.common.base.BaseFragment
 import dev.pinaki.desipe.common.util.*
 import dev.pinaki.desipe.data.model.Recipe
 import dev.pinaki.desipe.databinding.ListingFragmentBinding
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
+@AndroidEntryPoint
 class RecipeListingFragment : BaseFragment<ListingFragmentBinding>(), View.OnClickListener {
 
     private val recipeListingAdapter = RecipeListingAdapter()
-    private val viewModel: RecipeListingViewModel by viewModel()
+    private val viewModel: RecipeListingViewModel by viewModels()
 
     override fun initializeBinding(
         inflater: LayoutInflater,

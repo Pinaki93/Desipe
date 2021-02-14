@@ -23,31 +23,27 @@
  *
  */
 
-package dev.pinaki.desipe.data.repository.impl
+package dev.pinaki.desipe.di.module
 
-import dev.pinaki.desipe.common.ds.DarkThemeMode
+import dagger.Binds
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import dev.pinaki.desipe.data.repository.RecipeRepository
 import dev.pinaki.desipe.data.repository.ThemeRepository
-import dev.pinaki.desipe.data.source.local.sharedprefs.SharedPreferencesManager
-import javax.inject.Inject
+import dev.pinaki.desipe.data.repository.impl.RecipeRepositoryImpl
+import dev.pinaki.desipe.data.repository.impl.ThemeRepositoryImpl
+import javax.inject.Singleton
 
-class ThemeRepositoryImpl @Inject constructor(
-    private val sharedPreferencesManager: SharedPreferencesManager
-) : ThemeRepository {
+@Module
+@InstallIn(SingletonComponent::class)
+interface RepositoryModule {
 
-    override fun getCurrentDarkThemeMode(): DarkThemeMode? {
-        return DarkThemeMode.fromString(
-            sharedPreferencesManager.getString(
-                KEY_CURRENT_THEME,
-                DarkThemeMode.SYSTEM.name
-            )
-        )
-    }
+    @Binds
+    @Singleton
+    fun bindsRecipeRepositoryImpl(recipeRepositoryImpl: RecipeRepositoryImpl): RecipeRepository
 
-    override fun setCurrentDarkThemeMode(theme: DarkThemeMode) {
-        sharedPreferencesManager.putString(KEY_CURRENT_THEME, theme.name)
-    }
-
-    companion object {
-        const val KEY_CURRENT_THEME = "current_theme"
-    }
+    @Binds
+    @Singleton
+    fun bindsThemeRepositoryImpl(themeRepositoryImpl: ThemeRepositoryImpl):ThemeRepository
 }
