@@ -27,8 +27,8 @@ Transitions:\
 Threading:\
 🚀 [Kotlin Coroutine](https://github.com/Kotlin/kotlinx.coroutines)\
 \
-Service Locator:\
-🚀 [Koin](https://github.com/InsertKoinIO/koin)\
+Dependency Injection:\
+🚀 [Dagger-Hilt](https://dagger.dev/hilt/)\
 \
 SQLite:\
 🚀 [Room Database](https://developer.android.com/topic/libraries/architecture/room?gclid=Cj0KCQjwo6D4BRDgARIsAA6uN187m5Vp-GP0Vg9HLx4JpN3CHfDGedLVNVTF0uxZd4d6N2gzAxVLfVkaAuqxEALw_wcB&gclsrc=aw.ds)\
